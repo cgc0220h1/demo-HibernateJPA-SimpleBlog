@@ -39,7 +39,7 @@
                                 <div class="post-meta align-items-center text-left clearfix">
                                     <span class="d-inline-block mt-1">Viết bởi <a href="#"
                                                                                   th:text="${post.author.name}">Chỗ này là tác giả</a></span>
-                                    <span th:text="${post.createTime}">Chỗ này là ngày tháng</span>
+                                    <span th:text="${post.createTime.day +'-' + post.createTime.month + '-' + post.createTime.year}">Chỗ này là ngày tháng</span>
                                 </div>
 
                                 <p th:text="${post.content}">Chỗ này viết tóm tắt</p>
@@ -54,7 +54,7 @@
                 <div class="col-md-12">
                     <div class="custom-pagination">
                         <th:block th:each="page : ${#numbers.sequence(1,numberOfPage)}">
-                            <a href="#" th:text="${page}"></a>
+                            <a th:href="@{/page{id}(id=${page})}" th:text="${page}"></a>
                         </th:block>
                         <span>...</span>
                     </div>

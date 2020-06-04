@@ -27,37 +27,36 @@
             </div>
 
             <div class="row">
-                <th:block>
+                <th:block th:each="post : ${postList}">
                     <div class="col-lg-4 mb-4">
                         <div class="entry2">
-                            <a href="single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
+                            <a href="single.html"><img th:src="${post.imageLink}" alt="Image" class="img-fluid rounded"></a>
                             <div class="excerpt">
-                                <span class="post-category text-white bg-secondary mb-3">Chỗ này là Tag</span>
+                                <span class="post-category text-white bg-secondary mb-3"
+                                      th:text="${post.tag.name}"></span>
 
-                                <h2><a href="single.html">Chỗ này là tiêu đề</a></h2>
+                                <h2><a href="single.html" th:text="${post.title}">Chỗ này là tiêu đề</a></h2>
                                 <div class="post-meta align-items-center text-left clearfix">
-                                    <span class="d-inline-block mt-1">Viết bởi <a href="#">Chỗ này là tác giả</a></span>
-                                    <span>Chỗ này là ngày tháng</span>
+                                    <span class="d-inline-block mt-1">Viết bởi <a href="#"
+                                                                                  th:text="${post.author.name}">Chỗ này là tác giả</a></span>
+                                    <span th:text="${post.createTime}">Chỗ này là ngày tháng</span>
                                 </div>
 
-                                <p>Chỗ này viết tóm tắt</p>
+                                <p th:text="${post.content}">Chỗ này viết tóm tắt</p>
                                 <p><a href="#">Ấn vào dây để đọc thêm</a></p>
                             </div>
                         </div>
                     </div>
                 </th:block>
-
             </div>
 
             <div class="row text-center pt-5 border-top">
                 <div class="col-md-12">
                     <div class="custom-pagination">
-                        <span>1</span>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
+                        <th:block th:each="page : ${#numbers.sequence(1,numberOfPage)}">
+                            <a href="#" th:text="${page}"></a>
+                        </th:block>
                         <span>...</span>
-                        <a href="#">15</a>
                     </div>
                 </div>
             </div>

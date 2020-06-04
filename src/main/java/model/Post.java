@@ -5,13 +5,10 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "post")
-public class Blog {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String author;
 
     @Column
     private String title;
@@ -25,29 +22,32 @@ public class Blog {
     @Column
     private String imageLink;
 
-    @Column
-    private String tag;
+    @ManyToOne
+    private Tag tag;
 
-    public Blog() {
+    @ManyToOne
+    private Author author;
+
+    public Post() {
     }
 
-    public Blog(Long id, String author, String title, String content, Timestamp createTime, String imageLink, String tag) {
+    public Post(String title, String content, Timestamp createTime, String imageLink, Tag tag, Author author) {
+        this.title = title;
+        this.content = content;
+        this.createTime = createTime;
+        this.imageLink = imageLink;
+        this.tag = tag;
+        this.author = author;
+    }
+
+    public Post(Long id, String title, String content, Timestamp createTime, String imageLink, Tag tag, Author author) {
         this.id = id;
-        this.author = author;
         this.title = title;
         this.content = content;
         this.createTime = createTime;
         this.imageLink = imageLink;
         this.tag = tag;
-    }
-
-    public Blog(String author, String title, String content, Timestamp createTime, String imageLink, String tag) {
         this.author = author;
-        this.title = title;
-        this.content = content;
-        this.createTime = createTime;
-        this.imageLink = imageLink;
-        this.tag = tag;
     }
 
     public Long getId() {
@@ -58,20 +58,12 @@ public class Blog {
         this.id = id;
     }
 
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String content) {
-        this.title = content;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -98,24 +90,32 @@ public class Blog {
         this.imageLink = imageLink;
     }
 
-    public String getTag() {
+    public Tag getTag() {
         return tag;
     }
 
-    public void setTag(String tag) {
+    public void setTag(Tag tag) {
         this.tag = tag;
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override
     public String toString() {
-        return "Blog{" +
+        return "Post{" +
                 "id=" + id +
-                ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createTime=" + createTime +
                 ", imageLink='" + imageLink + '\'' +
-                ", tag='" + tag + '\'' +
+                ", tag=" + tag +
+                ", author=" + author +
                 '}';
     }
 }

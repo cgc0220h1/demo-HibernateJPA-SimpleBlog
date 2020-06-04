@@ -1,5 +1,6 @@
 package config;
 
+import model.Post;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -19,6 +20,9 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
+import repository.IBlogRepository;
+import service.IService;
+import service.post.PostServiceImpl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -108,5 +112,10 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
         registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/");
+    }
+
+    @Bean
+    public IService<Post> postService(IBlogRepository blogRepository) {
+        return new PostServiceImpl(blogRepository);
     }
 }

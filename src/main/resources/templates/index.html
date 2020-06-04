@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: title">
+<head th:replace="layout :: head">
     <title>Title</title>
 </head>
 <body>
@@ -39,11 +39,11 @@
                                 <div class="post-meta align-items-center text-left clearfix">
                                     <span class="d-inline-block mt-1">Viết bởi <a href="#"
                                                                                   th:text="${post.author.name}">Chỗ này là tác giả</a></span>
-                                    <span th:text="${post.createTime.day +'-' + post.createTime.month + '-' + post.createTime.year}">Chỗ này là ngày tháng</span>
+                                    <span th:text="'  ' + ${#dates.format(post.createTime,'dd-MM-yyyy')}">Chỗ này là ngày tháng</span>
                                 </div>
 
                                 <p th:text="${post.content}">Chỗ này viết tóm tắt</p>
-                                <p><a href="#">Ấn vào dây để đọc thêm</a></p>
+                                <p><a th:href="@{/blog/{id}(id=${post.id})}">Đọc thêm</a></p>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                 <div class="col-md-12">
                     <div class="custom-pagination">
                         <th:block th:each="page : ${#numbers.sequence(1,numberOfPage)}">
-                            <a th:href="@{/page{id}(id=${page})}" th:text="${page}"></a>
+                            <a th:href="@{/homepage/page{id}(id=${page})}" th:text="${page}"></a>
                         </th:block>
                         <span>...</span>
                     </div>
@@ -69,20 +69,7 @@
 
 </div>
 
-<script src="../static/js/jquery-3.3.1.min.js" th:src="@{js/jquery-3.3.1.min.js}"></script>
-<script src="../static/js/jquery-migrate-3.0.1.min.js" th:src="@{js/jquery-migrate-3.0.1.min.js}"></script>
-<script src="../static/js/jquery-ui.js" th:src="@{js/jquery-ui.js}"></script>
-<script src="../static/js/popper.min.js" th:src="@{js/popper.min.js}"></script>
-<script src="../static/js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
-<script src="../static/js/owl.carousel.min.js" th:src="@{js/owl.carousel.min.js}"></script>
-<script src="../static/js/jquery.stellar.min.js" th:src="@{js/jquery.stellar.min.js}"></script>
-<script src="../static/js/jquery.countdown.min.js" th:src="@{js/jquery.countdown.min.js}"></script>
-<script src="../static/js/jquery.magnific-popup.min.js" th:src="@{js/jquery.magnific-popup.min.js}"></script>
-<script src="../static/js/bootstrap-datepicker.min.js" th:src="@{js/bootstrap-datepicker.min.js}"></script>
-<script src="../static/js/aos.js" th:src="@{js/aos.js}"></script>
-
-<script src="js/main.js"></script>
-
+<div th:replace="layout :: script"></div>
 
 </body>
 </html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <header th:replace="layout :: header"></header>
+
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+         style="background-image: url('#');" th:style="'background-image: url('+${post.imageLink}+');'">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
+                        <span class="post-category text-white bg-success mb-3"
+                              th:text="${post.tag.name}">Tag ở đây</span>
+                        <h1 class="mb-4" th:text="${post.title}">Title ở đây</h1>
+                        <div class="post-meta align-items-center text-center">
+                            <span class="d-inline-block mt-1" th:text="${post.author.name}">Tác giả ở đây</span>
+                            <span th:text="'  ' + ${#dates.format(post.createTime,'dd-MM-yyyy')}">Ngày post ở đây</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="site-section py-lg">
+        <div class="container">
+
+            <div class="row post-entries element-animate">
+
+                <div class="col-md-12 col-lg-8 main-content">
+
+                    <div class="post-content-body">
+                        <p th:text="${post.content}"></p>
+                    </div>
+
+                    <div class="pt-5">
+                        <p>Categories: <a href="#">Food</a>, <a href="#">Travel</a> Tags: <a href="#">#manila</a>, <a
+                                href="#">#asia</a></p>
+                    </div>
+
+                </div>
+
+                <!-- END main-content -->
+
+                <div class="col-md-12 col-lg-4 sidebar">
+                    <div class="sidebar-box search-form-wrap">
+                        <form action="#" class="search-form">
+                            <div class="form-group">
+                                <span class="icon fa fa-search"></span>
+                                <input type="text" class="form-control" id="s"
+                                       placeholder="Type a keyword and hit enter">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END sidebar-box -->
+                    <div class="sidebar-box">
+                        <div class="bio text-center">
+                            <img src="images/person_2.jpg" alt="Image Placeholder" class="img-fluid mb-5">
+                            <div class="bio-body">
+                                <h2>Craig David</h2>
+                                <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem
+                                    facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam
+                                    fuga sit molestias minus.</p>
+                                <p><a href="#" class="btn btn-primary btn-sm rounded px-4 py-2">Read my bio</a></p>
+                                <p class="social">
+                                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END sidebar-box -->
+                    <!-- END sidebar-box -->
+
+                    <div class="sidebar-box">
+                        <h3 class="heading">Chủ đề</h3>
+                        <ul class="categories">
+                            <li><a href="#">Food <span>(12)</span></a></li>
+                            <li><a href="#">Travel <span>(22)</span></a></li>
+                            <li><a href="#">Lifestyle <span>(37)</span></a></li>
+                            <li><a href="#">Business <span>(42)</span></a></li>
+                            <li><a href="#">Adventure <span>(14)</span></a></li>
+                        </ul>
+                    </div>
+                    <!-- END sidebar-box -->
+
+                    <div class="sidebar-box">
+                        <h3 class="heading">Tags</h3>
+                        <ul class="tags">
+                            <li><a href="#">Travel</a></li>
+                            <li><a href="#">Adventure</a></li>
+                            <li><a href="#">Food</a></li>
+                            <li><a href="#">Lifestyle</a></li>
+                            <li><a href="#">Business</a></li>
+                            <li><a href="#">Freelancing</a></li>
+                            <li><a href="#">Travel</a></li>
+                            <li><a href="#">Adventure</a></li>
+                            <li><a href="#">Food</a></li>
+                            <li><a href="#">Lifestyle</a></li>
+                            <li><a href="#">Business</a></li>
+                            <li><a href="#">Freelancing</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- END sidebar -->
+
+            </div>
+        </div>
+    </section>
+
+    <div th:replace="layout :: footer"></div>
+
+</div>
+
+<div th:replace="layout :: script"></div>
+
+</body>
+</html>

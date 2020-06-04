@@ -112,6 +112,7 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
         registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
         registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/static/fonts/");
+        registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
     }
 
     @Bean

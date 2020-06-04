@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="title">
+<head th:fragment="head">
     <title>Nam's Blog</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -38,7 +38,7 @@
             <div class="col-8 text-right">
                 <nav class="site-navigation" role="navigation">
                     <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
-                        <li><a href="/">Trang chủ</a></li>
+                        <li><a th:href="@{/homepage}">Trang chủ</a></li>
                         <li><a href="category.html">Chủ đề</a></li>
                         <li><a href="category.html">Liên hệ</a></li>
                         <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span
@@ -56,7 +56,7 @@
         <div class="row mb-5">
             <div class="col-md-8">
                 <h3 class="footer-heading mb-4">Thông tin thêm</h3>
-                <p>Tôi là lập trình viên (người lập trình hay thảo chương viên điện toán) là người viết ra các chương
+                <p>Mình là một lập trình viên (người lập trình hay thảo chương viên điện toán) là người viết ra các chương
                     trình máy tính. "Thảo chương viên điện toán" là một từ cũ, được dùng trước năm 1975, và đang trở nên
                     ít phổ thông hơn. Theo thuật ngữ máy tính, lập trình viên có thể là một chuyên gia trong một lĩnh
                     vực của chương trình máy tính hoặc là một người không chuyên, viết mã cho các loại phần mềm. Người
@@ -65,7 +65,7 @@
             </div>
             <div class="col-md-4" style="float: right">
                 <div>
-                    <h3 class="footer-heading mb-4">Tôi ở trên những nơi này</h3>
+                    <h3 class="footer-heading mb-4">Mình dùng mạng xã hội này</h3>
                     <p>
                         <a href="https://github.com/vanduc2514"><span class="icon-github p-2"></span></a>
                         <a href="https://www.facebook.com/vanduc2514"><span
@@ -82,12 +82,27 @@
                 <p>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;
-                    <script>document.write(new Date().getFullYear());</script>
+                    <script>document.write(new Date().getFullYear().toString());</script>
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                 </p>
             </div>
         </div>
     </div>
+</div>
+
+<div th:fragment="script">
+    <script src="../static/js/jquery-3.3.1.min.js" th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script src="../static/js/jquery-migrate-3.0.1.min.js" th:src="@{/js/jquery-migrate-3.0.1.min.js}"></script>
+    <script src="../static/js/jquery-ui.js" th:src="@{/js/jquery-ui.js}"></script>
+    <script src="../static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="../static/js/owl.carousel.min.js" th:src="@{/js/owl.carousel.min.js}"></script>
+    <script src="../static/js/jquery.stellar.min.js" th:src="@{/js/jquery.stellar.min.js}"></script>
+    <script src="../static/js/jquery.countdown.min.js" th:src="@{/js/jquery.countdown.min.js}"></script>
+    <script src="../static/js/jquery.magnific-popup.min.js" th:src="@{/js/jquery.magnific-popup.min.js}"></script>
+    <script src="../static/js/bootstrap-datepicker.min.js" th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+    <script src="../static/js/aos.js" th:src="@{/js/aos.js}"></script>
+    <script src="../static/js/main.js" th:src="@{/js/main.js}"></script>
 </div>
 
 </body>

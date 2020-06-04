@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: title">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <header th:replace="layout :: header"></header>
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2>Bài viết gần đây</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <th:block>
+                    <div class="col-lg-4 mb-4">
+                        <div class="entry2">
+                            <a href="single.html"><img src="images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
+                            <div class="excerpt">
+                                <span class="post-category text-white bg-secondary mb-3">Chỗ này là Tag</span>
+
+                                <h2><a href="single.html">Chỗ này là tiêu đề</a></h2>
+                                <div class="post-meta align-items-center text-left clearfix">
+                                    <span class="d-inline-block mt-1">Viết bởi <a href="#">Chỗ này là tác giả</a></span>
+                                    <span>Chỗ này là ngày tháng</span>
+                                </div>
+
+                                <p>Chỗ này viết tóm tắt</p>
+                                <p><a href="#">Ấn vào dây để đọc thêm</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+
+            </div>
+
+            <div class="row text-center pt-5 border-top">
+                <div class="col-md-12">
+                    <div class="custom-pagination">
+                        <span>1</span>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <span>...</span>
+                        <a href="#">15</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div th:replace="layout :: footer"></div>
+
+</div>
+
+<script src="../static/js/jquery-3.3.1.min.js" th:src="@{js/jquery-3.3.1.min.js}"></script>
+<script src="../static/js/jquery-migrate-3.0.1.min.js" th:src="@{js/jquery-migrate-3.0.1.min.js}"></script>
+<script src="../static/js/jquery-ui.js" th:src="@{js/jquery-ui.js}"></script>
+<script src="../static/js/popper.min.js" th:src="@{js/popper.min.js}"></script>
+<script src="../static/js/bootstrap.min.js" th:src="@{js/bootstrap.min.js}"></script>
+<script src="../static/js/owl.carousel.min.js" th:src="@{js/owl.carousel.min.js}"></script>
+<script src="../static/js/jquery.stellar.min.js" th:src="@{js/jquery.stellar.min.js}"></script>
+<script src="../static/js/jquery.countdown.min.js" th:src="@{js/jquery.countdown.min.js}"></script>
+<script src="../static/js/jquery.magnific-popup.min.js" th:src="@{js/jquery.magnific-popup.min.js}"></script>
+<script src="../static/js/bootstrap-datepicker.min.js" th:src="@{js/bootstrap-datepicker.min.js}"></script>
+<script src="../static/js/aos.js" th:src="@{js/aos.js}"></script>
+
+<script src="js/main.js"></script>
+
+
+</body>
+</html>

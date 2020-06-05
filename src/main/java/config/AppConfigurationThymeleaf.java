@@ -2,6 +2,7 @@ package config;
 
 import model.Author;
 import model.Post;
+import model.Tag;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -21,11 +22,13 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import repository.IAuthorRepository;
-import repository.IPostRepository;
-import service.IService;
+import repository.AuthorRepository;
+import repository.PostRepository;
+import repository.TagRepository;
+import service.GenericService;
 import service.author.AuthorServiceImp;
 import service.post.PostServiceImp;
+import service.tag.TagServiceImp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -120,12 +123,17 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
     }
 
     @Bean
-    public IService<Post> postService(IPostRepository blogRepository) {
+    public GenericService<Post> postService(PostRepository blogRepository) {
         return new PostServiceImp(blogRepository);
     }
 
     @Bean
-    public IService<Author> authorService(IAuthorRepository authorRepository) {
+    public GenericService<Author> authorService(AuthorRepository authorRepository) {
         return new AuthorServiceImp(authorRepository);
+    }
+
+    @Bean
+    public GenericService<Tag> tagService(TagRepository tagRepository) {
+        return new TagServiceImp(tagRepository);
     }
 }

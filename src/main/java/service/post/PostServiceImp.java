@@ -6,16 +6,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import repository.IPostRepository;
+import repository.PostRepository;
 
 import java.util.List;
 
 @Service
-public class PostServiceImp implements IPostService {
-    private final IPostRepository blogRepository;
+public class PostServiceImp implements PostService {
+    private final PostRepository blogRepository;
 
     @Autowired
-    public PostServiceImp(IPostRepository blogRepository) {
+    public PostServiceImp(PostRepository blogRepository) {
         this.blogRepository = blogRepository;
     }
 

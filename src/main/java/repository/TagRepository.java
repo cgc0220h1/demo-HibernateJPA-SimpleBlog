@@ -1,9 +1,9 @@
 package repository;
 
-import model.Post;
+import model.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IPostRepository extends JpaRepository<Post, Long> {
+public interface TagRepository extends JpaRepository<Tag, Long> {
 }

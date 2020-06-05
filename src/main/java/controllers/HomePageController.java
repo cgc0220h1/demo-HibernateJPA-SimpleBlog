@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import service.IService;
+import service.GenericService;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,10 +18,10 @@ import java.util.regex.Pattern;
 @Controller
 @RequestMapping("/homepage")
 public class HomePageController {
-    private final IService<Post> postService;
+    private final GenericService<Post> postService;
 
     @Autowired
-    public HomePageController(IService<Post> postService) {
+    public HomePageController(GenericService<Post> postService) {
         this.postService = postService;
     }
 

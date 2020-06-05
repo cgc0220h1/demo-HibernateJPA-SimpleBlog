@@ -5,17 +5,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import repository.IAuthorRepository;
+import repository.AuthorRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AuthorServiceImp implements IAuthorService {
-    private IAuthorRepository authorRepository;
+public class AuthorServiceImp implements AuthorService {
+    private AuthorRepository authorRepository;
 
     @Autowired
-    public AuthorServiceImp(IAuthorRepository authorRepository) {
+    public AuthorServiceImp(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
 

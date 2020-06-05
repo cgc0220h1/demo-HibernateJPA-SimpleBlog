@@ -1,5 +1,6 @@
 package config;
 
+import model.Author;
 import model.Post;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -20,9 +21,11 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import repository.IBlogRepository;
+import repository.IAuthorRepository;
+import repository.IPostRepository;
 import service.IService;
-import service.post.PostServiceImpl;
+import service.author.AuthorServiceImp;
+import service.post.PostServiceImp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -97,6 +100,7 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+        properties.setProperty("hibernate.showSql", "true");
         return properties;
     }
 
@@ -116,7 +120,12 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
     }
 
     @Bean
-    public IService<Post> postService(IBlogRepository blogRepository) {
-        return new PostServiceImpl(blogRepository);
+    public IService<Post> postService(IPostRepository blogRepository) {
+        return new PostServiceImp(blogRepository);
+    }
+
+    @Bean
+    public IService<Author> authorService(IAuthorRepository authorRepository) {
+        return new AuthorServiceImp(authorRepository);
     }
 }

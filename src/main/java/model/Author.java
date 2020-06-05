@@ -22,22 +22,32 @@ public class Author {
     @Column
     private String email;
 
+    @Column(columnDefinition = "TEXT")
+    private String bio;
+
+    @Column
+    private String imageLink;
+
     public Author() {
     }
 
-    public Author(Long id, String name, Date dateOfBirth, String phoneNumber, String email) {
+    public Author(Long id, String name, Date dateOfBirth, String phoneNumber, String email, String bio, String imageLink) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.bio = bio;
+        this.imageLink = imageLink;
     }
 
-    public Author(String name, Date dateOfBirth, String phoneNumber, String email) {
+    public Author(String name, Date dateOfBirth, String phoneNumber, String email, String bio, String imageLink) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.bio = bio;
+        this.imageLink = imageLink;
     }
 
     public Long getId() {
@@ -80,6 +90,22 @@ public class Author {
         this.email = email;
     }
 
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
@@ -88,6 +114,8 @@ public class Author {
                 ", dateOfBirth=" + dateOfBirth +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
+                ", bio='" + bio + '\'' +
+                ", imageLink='" + imageLink + '\'' +
                 '}';
     }
 }

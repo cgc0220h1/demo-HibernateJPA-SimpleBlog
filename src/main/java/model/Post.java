@@ -23,9 +23,11 @@ public class Post {
     private String imageLink;
 
     @ManyToOne
+    @JoinColumn(name = "tag_id", referencedColumnName = "id")
     private Tag tag;
 
     @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
     public Post() {

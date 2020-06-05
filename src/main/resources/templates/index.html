@@ -30,12 +30,12 @@
                 <th:block th:each="post : ${postList}">
                     <div class="col-lg-4 mb-4">
                         <div class="entry2">
-                            <a href="single.html"><img th:src="${post.imageLink}" alt="Image" class="img-fluid rounded"></a>
+                            <a th:href="@{/blog/{id}(id=${post.id})}"><img th:src="${post.imageLink}" alt="Image" class="img-fluid rounded"></a>
                             <div class="excerpt">
                                 <span class="post-category text-white bg-secondary mb-3"
                                       th:text="${post.tag.name}"></span>
 
-                                <h2><a href="single.html" th:text="${post.title}">Chỗ này là tiêu đề</a></h2>
+                                <h2><a th:href="@{/blog/{id}(id=${post.id})}" th:text="${post.title}">Chỗ này là tiêu đề</a></h2>
                                 <div class="post-meta align-items-center text-left clearfix">
                                     <span class="d-inline-block mt-1">Viết bởi <a href="#"
                                                                                   th:text="${post.author.name}">Chỗ này là tác giả</a></span>

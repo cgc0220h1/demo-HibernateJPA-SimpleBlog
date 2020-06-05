@@ -6,46 +6,43 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import repository.IBlogRepository;
+import repository.IPostRepository;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
-public class PostServiceImpl implements IPostService {
-    private final IBlogRepository blogRepository;
+public class PostServiceImp implements IPostService {
+    private final IPostRepository blogRepository;
 
     @Autowired
-    public PostServiceImpl(IBlogRepository blogRepository) {
+    public PostServiceImp(IPostRepository blogRepository) {
         this.blogRepository = blogRepository;
     }
 
     @Override
-    public List<Post> findAllPost() {
+    public List<Post> findAll() {
         return blogRepository.findAll();
     }
 
     @Override
-    public List<Post> findPostByPage(Pageable pageable) {
+    public List<Post> findByPage(Pageable pageable) {
         return blogRepository.findAll(pageable).getContent();
     }
 
     @Override
-    public List<Post> findPostByPage(int startPageIndex, int numberOfElements) {
+    public List<Post> findByPage(int startPageIndex, int numberOfElements) {
         Pageable pageable = PageRequest.of(startPageIndex, numberOfElements);
         return blogRepository.findAll(pageable).getContent();
     }
 
     @Override
-    public Page<Post> findPostPage(int startPageIndex, int numberOfElements) {
+    public Page<Post> findPage(int startPageIndex, int numberOfElements) {
         Pageable pageable = PageRequest.of(startPageIndex, numberOfElements);
         return blogRepository.findAll(pageable);
     }
 
     @Override
-    public Post findOnePost(Long id) {
+    public Post findOne(Long id) {
         if (blogRepository.findById(id).isPresent()) {
             return blogRepository.findById(id).get();
         } else {
@@ -54,7 +51,7 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public Post savePost(Post post) {
+    public Post save(Post post) {
         if (post == null) {
             return null;
         }
@@ -62,12 +59,12 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public void deletePost(Post post) {
+    public void delete(Post post) {
         blogRepository.delete(post);
     }
 
     @Override
-    public void deletePost(Long postId) {
+    public void delete(Long postId) {
         blogRepository.deleteById(postId);
     }
 }

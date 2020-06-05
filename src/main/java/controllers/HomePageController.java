@@ -27,25 +27,20 @@ public class HomePageController {
 
     @ModelAttribute("numberOfPage")
     public int numberOfPage() {
-        return postService.findPostPage(0, 6).getTotalPages();
+        return postService.findPage(0, 6).getTotalPages();
     }
 
     @GetMapping()
     public ModelAndView showHome() {
-        ModelAndView modelAndView = new ModelAndView("index");
-        List<Post> postList = postService.findPostByPage(0, 6);
-        modelAndView.addObject("numberOfPage");
-        List<Post> filterPost = summaryPost(postList);
-        modelAndView.addObject("postList", filterPost);
-        return modelAndView;
+        return showPage(1);
     }
 
     @GetMapping("/page{id}")
-    public ModelAndView switchPage(@PathVariable("id") int id) {
+    public ModelAndView showPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("index");
-        List<Post> postList = postService.findPostByPage(id - 1, 6);
+        List<Post> postList = postService.findByPage(id - 1, 6);
         List<Post> filterPost = summaryPost(postList);
-        modelAndView.addObject("postList",filterPost);
+        modelAndView.addObject("postList", filterPost);
         return modelAndView;
     }
 

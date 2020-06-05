@@ -6,19 +6,19 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface IService<T> {
-    List<T> findAllPost();
+    List<T> findAll();
 
-    List<T> findPostByPage(Pageable pageable);
+    List<T> findByPage(Pageable pageable);
 
-    List<T> findPostByPage(int startPageIndex, int numberOfElements);
+    List<T> findByPage(int startPageIndex, int numberOfElements);
 
-    Page<T> findPostPage(int startPageIndex, int numberOfElements);
+    Page<T> findPage(int startPageIndex, int numberOfElements);
 
-    T findOnePost(Long id);
+    T findOne(Long id);
 
-    T savePost(T model);
+    T save(T model);
 
-    void deletePost(T model);
+    void delete(T model);
 
-    void deletePost(Long id);
+    void delete(Long id);
 }

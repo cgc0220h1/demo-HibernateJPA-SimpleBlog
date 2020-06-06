@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2>Bài viết gần đây</h2>
+                    <h2 th:text="${headerTitle}">Bài viết gần đây</h2>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                             <a th:href="@{/blog/{id}(id=${post.id})}"><img th:src="${post.imageLink}" alt="Image" class="img-fluid rounded"></a>
                             <div class="excerpt">
                                 <span class="post-category text-white bg-secondary mb-3"
-                                      th:text="${post.tag.name}"></span>
+                                      th:text="${post.category.name}"></span>
 
                                 <h2><a th:href="@{/blog/{id}(id=${post.id})}" th:text="${post.title}">Chỗ này là tiêu đề</a></h2>
                                 <div class="post-meta align-items-center text-left clearfix">

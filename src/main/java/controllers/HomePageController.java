@@ -2,18 +2,14 @@ package controllers;
 
 import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import service.GenericService;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import util.PostUtil;
 
 @Controller
 @RequestMapping("/homepage")
@@ -25,11 +21,6 @@ public class HomePageController {
         this.postService = postService;
     }
 
-    @ModelAttribute("numberOfPage")
-    public int numberOfPage() {
-        return postService.findPage(0, 6).getTotalPages();
-    }
-
     @GetMapping()
     public ModelAndView showHome() {
         return showPage(1);
@@ -38,30 +29,11 @@ public class HomePageController {
     @GetMapping("/page{id}")
     public ModelAndView showPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("index");
-        List<Post> postList = postService.findByPage(id - 1, 6);
-        List<Post> filterPost = summaryPost(postList);
+        Page<Post> postList = postService.findAll(id - 1, 6);
+        Page<Post> filterPost = PostUtil.summaryPost(postList);
+        modelAndView.addObject("numberOfPage", filterPost.getTotalPages());
         modelAndView.addObject("postList", filterPost);
+        modelAndView.addObject("headerTitle", "Bài viết gần đây");
         return modelAndView;
-    }
-
-    private List<Post> summaryPost(List<Post> postList) {
-        List<Post> filterPost = new LinkedList<>();
-        for (Post post : postList) {
-            post.setContent(truncateAfterWords(36, post.getContent()));
-            filterPost.add(post);
-        }
-        return filterPost;
-    }
-
-    private String truncateAfterWords(int numberOfWords, String string) {
-        final Pattern WB_PATTERN = Pattern.compile("(?<=\\w)\\b");
-        if (string == null) return null;
-        if (numberOfWords <= 0) return "";
-        Matcher m = WB_PATTERN.matcher(string);
-        for (int i = 0; i < numberOfWords && m.find(); i++) ;
-        if (m.hitEnd())
-            return string + " ... ";
-        else
-            return string.substring(0, m.end()) + " ... ";
     }
 }

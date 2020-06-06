@@ -30,4 +30,6 @@ dependencies {
     compile group: 'org.springframework', name: 'spring-orm', version: '5.2.5.RELEASE'
     compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.10.Final'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+
+    compile group: 'org.apache.commons', name: 'commons-text', version: '1.6'
 }

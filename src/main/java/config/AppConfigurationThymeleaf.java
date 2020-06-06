@@ -1,5 +1,6 @@
 package config;
 
+import formatter.TimeStampFormatter;
 import model.Author;
 import model.Category;
 import model.Post;
@@ -10,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -24,11 +26,11 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import repository.AuthorRepository;
 import repository.PostRepository;
-import repository.TagRepository;
+import repository.CategoryRepository;
 import service.GenericService;
 import service.author.AuthorServiceImp;
 import service.post.PostServiceImp;
-import service.tag.TagServiceImp;
+import service.category.CategoryServiceImp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -122,9 +124,14 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
         registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
     }
 
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        registry.addFormatter(new TimeStampFormatter());
+    }
+
     @Bean
-    public GenericService<Post> postService(PostRepository blogRepository) {
-        return new PostServiceImp(blogRepository);
+    public GenericService<Post> postService(PostRepository postRepository) {
+        return new PostServiceImp(postRepository);
     }
 
     @Bean
@@ -133,7 +140,7 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
     }
 
     @Bean
-    public GenericService<Category> tagService(TagRepository tagRepository) {
-        return new TagServiceImp(tagRepository);
+    public GenericService<Category> tagService(CategoryRepository categoryRepository) {
+        return new CategoryServiceImp(categoryRepository);
     }
 }

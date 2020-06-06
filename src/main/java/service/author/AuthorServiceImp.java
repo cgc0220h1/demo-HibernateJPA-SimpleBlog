@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import repository.AuthorRepository;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,17 +27,17 @@ public class AuthorServiceImp implements AuthorService {
     }
 
     @Override
-    public List<Author> findByPage(Pageable pageable) {
+    public Page<Author> findAll(Pageable pageable) {
         return null;
     }
 
     @Override
-    public List<Author> findByPage(int startPageIndex, int numberOfElements) {
+    public Page<Author> findAll(int startPageIndex, int numberOfElements) {
         return null;
     }
 
     @Override
-    public Page<Author> findPage(int startPageIndex, int numberOfElements) {
+    public Page<Author> findInDateRange(Timestamp start, Timestamp end) {
         return null;
     }
 

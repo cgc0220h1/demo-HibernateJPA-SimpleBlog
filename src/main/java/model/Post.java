@@ -109,7 +109,7 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", headerTitle='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createTime=" + createTime +
                 ", imageLink='" + imageLink + '\'' +

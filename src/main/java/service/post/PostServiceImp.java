@@ -8,43 +8,44 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import repository.PostRepository;
 
+import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class PostServiceImp implements PostService {
-    private final PostRepository blogRepository;
+    private final PostRepository postRepository;
 
     @Autowired
-    public PostServiceImp(PostRepository blogRepository) {
-        this.blogRepository = blogRepository;
+    public PostServiceImp(PostRepository postRepository) {
+        this.postRepository = postRepository;
     }
 
     @Override
     public List<Post> findAll() {
-        return blogRepository.findAll();
+        return postRepository.findAll();
     }
 
     @Override
-    public List<Post> findByPage(Pageable pageable) {
-        return blogRepository.findAll(pageable).getContent();
+    public Page<Post> findAll(Pageable pageable) {
+        return postRepository.findAll(pageable);
     }
 
     @Override
-    public List<Post> findByPage(int startPageIndex, int numberOfElements) {
+    public Page<Post> findAll(int startPageIndex, int numberOfElements) {
         Pageable pageable = PageRequest.of(startPageIndex, numberOfElements);
-        return blogRepository.findAll(pageable).getContent();
+        return postRepository.findAll(pageable);
     }
 
     @Override
-    public Page<Post> findPage(int startPageIndex, int numberOfElements) {
-        Pageable pageable = PageRequest.of(startPageIndex, numberOfElements);
-        return blogRepository.findAll(pageable);
+    public Page<Post> findInDateRange(Timestamp start, Timestamp end) {
+        return postRepository.findPostByCreateTimeBetween(start, end, PageRequest.of(0, 6));
     }
 
     @Override
     public Post findOne(Long id) {
-        if (blogRepository.findById(id).isPresent()) {
-            return blogRepository.findById(id).get();
+        if (postRepository.findById(id).isPresent()) {
+            return postRepository.findById(id).get();
         } else {
             return null;
         }
@@ -55,16 +56,16 @@ public class PostServiceImp implements PostService {
         if (post == null) {
             return null;
         }
-        return blogRepository.save(post);
+        return postRepository.save(post);
     }
 
     @Override
     public void delete(Post post) {
-        blogRepository.delete(post);
+        postRepository.delete(post);
     }
 
     @Override
     public void delete(Long postId) {
-        blogRepository.deleteById(postId);
+        postRepository.deleteById(postId);
     }
 }

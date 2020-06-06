@@ -2,6 +2,8 @@ package model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "author")
@@ -28,26 +30,11 @@ public class Author {
     @Column
     private String imageLink;
 
+    @OneToMany
+    @Access(AccessType.PROPERTY)
+    private Collection<Post> post;
+
     public Author() {
-    }
-
-    public Author(Long id, String name, Date dateOfBirth, String phoneNumber, String email, String bio, String imageLink) {
-        this.id = id;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.bio = bio;
-        this.imageLink = imageLink;
-    }
-
-    public Author(String name, Date dateOfBirth, String phoneNumber, String email, String bio, String imageLink) {
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.bio = bio;
-        this.imageLink = imageLink;
     }
 
     public Long getId() {
@@ -106,6 +93,14 @@ public class Author {
         this.imageLink = imageLink;
     }
 
+    public Collection<Post> getPost() {
+        return post;
+    }
+
+    public void setPost(Collection<Post> posts) {
+        this.post = posts;
+    }
+
     @Override
     public String toString() {
         return "Author{" +
@@ -116,6 +111,27 @@ public class Author {
                 ", email='" + email + '\'' +
                 ", bio='" + bio + '\'' +
                 ", imageLink='" + imageLink + '\'' +
+                ", posts=" + post +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Author)) return false;
+        Author author = (Author) o;
+        return Objects.equals(getId(), author.getId()) &&
+                Objects.equals(getName(), author.getName()) &&
+                Objects.equals(getDateOfBirth(), author.getDateOfBirth()) &&
+                Objects.equals(getPhoneNumber(), author.getPhoneNumber()) &&
+                Objects.equals(getEmail(), author.getEmail()) &&
+                Objects.equals(getBio(), author.getBio()) &&
+                Objects.equals(getImageLink(), author.getImageLink()) &&
+                Objects.equals(getPost(), author.getPost());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getDateOfBirth(), getPhoneNumber(), getEmail(), getBio(), getImageLink(), getPost());
     }
 }

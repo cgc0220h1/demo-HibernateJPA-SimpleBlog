@@ -2,6 +2,8 @@ package model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "post")
@@ -24,32 +26,19 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "tag_id", referencedColumnName = "id")
-    private Tag tag;
+    @Access(AccessType.PROPERTY)
+    private Category category;
 
     @ManyToOne
     @JoinColumn(name = "author_id", referencedColumnName = "id")
+    @Access(AccessType.PROPERTY)
     private Author author;
 
+    @OneToMany
+    @Access(AccessType.PROPERTY)
+    private Collection<Comment> comment;
+
     public Post() {
-    }
-
-    public Post(String title, String content, Timestamp createTime, String imageLink, Tag tag, Author author) {
-        this.title = title;
-        this.content = content;
-        this.createTime = createTime;
-        this.imageLink = imageLink;
-        this.tag = tag;
-        this.author = author;
-    }
-
-    public Post(Long id, String title, String content, Timestamp createTime, String imageLink, Tag tag, Author author) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.createTime = createTime;
-        this.imageLink = imageLink;
-        this.tag = tag;
-        this.author = author;
     }
 
     public Long getId() {
@@ -92,12 +81,12 @@ public class Post {
         this.imageLink = imageLink;
     }
 
-    public Tag getTag() {
-        return tag;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setTag(Tag tag) {
-        this.tag = tag;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public Author getAuthor() {
@@ -108,6 +97,14 @@ public class Post {
         this.author = author;
     }
 
+    public Collection<Comment> getComment() {
+        return comment;
+    }
+
+    public void setComment(Collection<Comment> comment) {
+        this.comment = comment;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
@@ -116,8 +113,29 @@ public class Post {
                 ", content='" + content + '\'' +
                 ", createTime=" + createTime +
                 ", imageLink='" + imageLink + '\'' +
-                ", tag=" + tag +
+                ", tag=" + category +
                 ", author=" + author +
+                ", comment=" + comment +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Post)) return false;
+        Post post = (Post) o;
+        return Objects.equals(getId(), post.getId()) &&
+                Objects.equals(getTitle(), post.getTitle()) &&
+                Objects.equals(getContent(), post.getContent()) &&
+                Objects.equals(getCreateTime(), post.getCreateTime()) &&
+                Objects.equals(getImageLink(), post.getImageLink()) &&
+                Objects.equals(getCategory(), post.getCategory()) &&
+                Objects.equals(getAuthor(), post.getAuthor()) &&
+                Objects.equals(getComment(), post.getComment());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getTitle(), getContent(), getCreateTime(), getImageLink(), getCategory(), getAuthor(), getComment());
     }
 }

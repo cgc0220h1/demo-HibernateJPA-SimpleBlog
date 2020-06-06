@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 public class AuthorServiceImp implements AuthorService {
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     @Autowired
     public AuthorServiceImp(AuthorRepository authorRepository) {

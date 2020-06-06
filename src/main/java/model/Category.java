@@ -1,10 +1,12 @@
 package model;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tag")
-public class Tag {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,16 +17,20 @@ public class Tag {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    public Tag() {
+    @OneToMany
+    @Access(AccessType.PROPERTY)
+    private Collection<Post> post;
+
+    public Category() {
     }
 
-    public Tag(Long id, String name, String description) {
+    public Category(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public Tag(String name, String description) {
+    public Category(String name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -53,6 +59,14 @@ public class Tag {
         this.description = description;
     }
 
+    public Collection<Post> getPost() {
+        return post;
+    }
+
+    public void setPost(Collection<Post> post) {
+        this.post = post;
+    }
+
     @Override
     public String toString() {
         return "Tag{" +
@@ -60,5 +74,21 @@ public class Tag {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+        Category category = (Category) o;
+        return Objects.equals(getId(), category.getId()) &&
+                Objects.equals(getName(), category.getName()) &&
+                Objects.equals(getDescription(), category.getDescription()) &&
+                Objects.equals(getPost(), category.getPost());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getDescription(), getPost());
     }
 }

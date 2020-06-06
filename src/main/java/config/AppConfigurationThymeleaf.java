@@ -1,8 +1,8 @@
 package config;
 
 import model.Author;
+import model.Category;
 import model.Post;
-import model.Tag;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -133,7 +133,7 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
     }
 
     @Bean
-    public GenericService<Tag> tagService(TagRepository tagRepository) {
+    public GenericService<Category> tagService(TagRepository tagRepository) {
         return new TagServiceImp(tagRepository);
     }
 }

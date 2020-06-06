@@ -1,8 +1,8 @@
 package controllers;
 
 import model.Author;
+import model.Category;
 import model.Post;
-import model.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,19 +20,19 @@ public class BlogController {
 
     private final GenericService<Author> authorService;
 
-    private final GenericService<Tag> tagService;
+    private final GenericService<Category> tagService;
 
     @Autowired
     public BlogController(GenericService<Post> postService,
                           GenericService<Author> authorService,
-                          GenericService<Tag> tagService) {
+                          GenericService<Category> tagService) {
         this.postService = postService;
         this.authorService = authorService;
         this.tagService = tagService;
     }
 
     @ModelAttribute(name = "tagList")
-    public List<Tag> tagList() {
+    public List<Category> tagList() {
         return tagService.findAll();
     }
 

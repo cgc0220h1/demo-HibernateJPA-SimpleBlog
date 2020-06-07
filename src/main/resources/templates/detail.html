@@ -25,11 +25,11 @@
                 <div class="col-md-12 col-lg-10">
                     <div class="post-entry text-center">
                         <span class="post-category text-white bg-success mb-3"
-                              th:text="${postSelected.category.name}">Tag ở đây</span>
+                              th:text="${{postSelected.category}}">Chủ đề ở đây</span>
                         <h1 class="mb-4" th:text="${postSelected.title}">Title ở đây</h1>
                         <div class="post-meta align-items-center text-center">
                             <span class="d-inline-block mt-1"
-                                  th:text="${authorOfSelectedPost.name}">Tác giả ở đây</span>
+                                  th:text="${postSelected.author.name}">Tác giả ở đây</span>
                             <span th:text="'  ' + ${#dates.format(postSelected.createTime,'dd-MM-yyyy')}">Ngày post ở đây</span>
                         </div>
                     </div>
@@ -50,7 +50,11 @@
                     </div>
 
                     <div class="pt-5">
-                        <p>Chủ đề: <a href="#" th:text="${postSelected.category.name}"></a></p>
+                        <p>Chủ đề:
+                            <a th:href="@{/category/{id}(id=${postSelected.category.id})}"
+                               th:text="${{postSelected.category}}">
+                            </a>
+                        </p>
                     </div>
 
                 </div>
@@ -70,11 +74,11 @@
                     <!-- END sidebar-box -->
                     <div class="sidebar-box">
                         <div class="bio text-center">
-                            <img th:src="${authorOfSelectedPost.imageLink}" alt="Image Placeholder"
+                            <img th:src="${postSelected.author.imageLink}" alt="Image Placeholder"
                                  class="img-fluid mb-5">
                             <div class="bio-body">
-                                <h2 th:text="${authorOfSelectedPost.name}">Chỗ này là tên tác giả</h2>
-                                <p class="mb-4" th:text="${authorOfSelectedPost.bio}">Chỗ này là bio tác giả</p>
+                                <h2 th:text="${postSelected.author.name}">Chỗ này là tên tác giả</h2>
+                                <p class="mb-4" th:text="${postSelected.author.bio}">Chỗ này là bio tác giả</p>
                                 <p class="social" hidden>
                                     <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
                                     <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
@@ -93,13 +97,13 @@
                             <th:block th:each="entry : ${datePostMap.entrySet()}">
                                 <li class="list-group-item ca">
                                     <a class="nav-link"
-                                       th:href="@{/date(range=${entry.getKey().getValue()})}"
+                                       th:href="@{/date/{range}(range=${entry.getKey().getValue()})}"
                                        th:text="${entry.getKey()}">Năm ở đây</a>
                                     <ul class="list-group">
                                         <th:block th:each="month : ${entry.getValue()}">
                                             <li class="list-group-item">
                                                 <a class="nav-link"
-                                                   th:href="@{/date(range=${entry.getKey()}+'-'+${month.getValue()})}"
+                                                   th:href="@{/date/{range}(range=${entry.getKey()}+'-'+${month.getValue()})}"
                                                    th:text="${{month}}">Tháng ở đây</a>
                                             </li>
                                         </th:block>
@@ -120,9 +124,12 @@
                     <div class="sidebar-box">
                         <h3 class="heading">Chủ đề</h3>
                         <ul class="tags">
-                            <li th:each="tag:${tagList}">
-                                <a href="jahdkhwakd" th:text="${tag.name}">Tên tag ở đây</a>
-                            </li>
+                            <th:block th:each="category:${categoryList}">
+                                <li>
+                                    <a th:href="@{/category/{id}(id=${category.id})}"
+                                       th:text="${{category}}">Tên Chủ đề ở đây</a>
+                                </li>
+                            </th:block>
                         </ul>
                     </div>
                 </div>

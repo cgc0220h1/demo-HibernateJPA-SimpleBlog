@@ -17,22 +17,11 @@ public class Category {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     @Access(AccessType.PROPERTY)
-    private Collection<Post> post;
+    private Collection<Post> posts;
 
     public Category() {
-    }
-
-    public Category(Long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
-
-    public Category(String name, String description) {
-        this.name = name;
-        this.description = description;
     }
 
     public Long getId() {
@@ -59,20 +48,21 @@ public class Category {
         this.description = description;
     }
 
-    public Collection<Post> getPost() {
-        return post;
+    public Collection<Post> getPosts() {
+        return posts;
     }
 
-    public void setPost(Collection<Post> post) {
-        this.post = post;
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
     public String toString() {
-        return "Tag{" +
+        return "Category{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", post=" + posts +
                 '}';
     }
 
@@ -84,11 +74,11 @@ public class Category {
         return Objects.equals(getId(), category.getId()) &&
                 Objects.equals(getName(), category.getName()) &&
                 Objects.equals(getDescription(), category.getDescription()) &&
-                Objects.equals(getPost(), category.getPost());
+                Objects.equals(getPosts(), category.getPosts());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription(), getPost());
+        return Objects.hash(getId(), getName(), getDescription(), getPosts());
     }
 }

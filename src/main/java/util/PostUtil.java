@@ -2,16 +2,20 @@ package util;
 
 import model.Post;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PostUtil {
-    public static Page<Post> summaryPost(Page<Post> postList, int numberOfWords) {
+    public static final Pageable PAGEABLE = PageRequest.of(0, 6, Sort.by("createTime").descending());
+
+    public static void summaryPost(Page<Post> postList, int numberOfWords) {
         for (Post post : postList) {
             post.setContent(truncateAfterWords(numberOfWords, post.getContent()));
         }
-        return postList;
     }
 
     private static String truncateAfterWords(int numberOfWords, String string) {

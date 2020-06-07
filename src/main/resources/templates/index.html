@@ -30,18 +30,26 @@
                 <th:block th:each="post : ${postList}">
                     <div class="col-lg-4 mb-4">
                         <div class="entry2">
-                            <a th:href="@{/blog/{id}(id=${post.id})}"><img th:src="${post.imageLink}" alt="Image" class="img-fluid rounded"></a>
+                            <a th:href="@{/blog/{id}(id=${post.id})}">
+                                <img th:src="${post.imageLink}" alt="Image"
+                                     class="img-fluid rounded" src="">
+                            </a>
                             <div class="excerpt">
                                 <span class="post-category text-white bg-secondary mb-3"
-                                      th:text="${post.category.name}"></span>
-
-                                <h2><a th:href="@{/blog/{id}(id=${post.id})}" th:text="${post.title}">Chỗ này là tiêu đề</a></h2>
+                                      th:text="${{post.category}}">Chỗ này là chủ đề
+                                </span>
+                                <h2>
+                                    <a th:href="@{/blog/{id}(id=${post.id})}"
+                                       th:text="${post.title}">Chỗ này là tiêu đề
+                                    </a>
+                                </h2>
                                 <div class="post-meta align-items-center text-left clearfix">
-                                    <span class="d-inline-block mt-1">Viết bởi <a href="#"
-                                                                                  th:text="${post.author.name}">Chỗ này là tác giả</a></span>
+                                    <span class="d-inline-block mt-1">Viết bởi
+                                        <a href="#" th:text="${post.author.name}">Chỗ này là tác giả
+                                        </a>
+                                    </span>
                                     <span th:text="'  ' + ${#dates.format(post.createTime,'dd-MM-yyyy')}">Chỗ này là ngày tháng</span>
                                 </div>
-
                                 <p th:text="${post.content}">Chỗ này viết tóm tắt</p>
                                 <p><a th:href="@{/blog/{id}(id=${post.id})}">Đọc thêm</a></p>
                             </div>
@@ -53,8 +61,9 @@
             <div class="row text-center pt-5 border-top">
                 <div class="col-md-12">
                     <div class="custom-pagination">
-                        <th:block th:each="page : ${#numbers.sequence(1,numberOfPage)}">
-                            <a th:href="@{/homepage/page{id}(id=${page})}" th:text="${page}"></a>
+                        <th:block th:each="pageNum : ${#numbers.sequence(1,numberOfPage)}">
+                            <a th:href="@{/{controller}/page/{pageNum}(pageNum=${pageNum},controller=${controller})}"
+                               th:text="${pageNum}"></a>
                         </th:block>
                         <span>...</span>
                     </div>

@@ -37,16 +37,6 @@ public class CategoryServiceImp implements CategoryService {
     }
 
     @Override
-    public Page<Category> findAll(int startPageIndex, int numberOfElements) {
-        return null;
-    }
-
-    @Override
-    public Page<Category> findInDateRange(Timestamp start, Timestamp end) {
-        return null;
-    }
-
-    @Override
     public Category findOne(Long id) {
         Optional<Category> tag = categoryRepository.findById(id);
         return tag.orElse(null);

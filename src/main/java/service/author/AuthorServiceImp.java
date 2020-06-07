@@ -38,16 +38,6 @@ public class AuthorServiceImp implements AuthorService {
     }
 
     @Override
-    public Page<Author> findAll(int startPageIndex, int numberOfElements) {
-        return null;
-    }
-
-    @Override
-    public Page<Author> findInDateRange(Timestamp start, Timestamp end) {
-        return null;
-    }
-
-    @Override
     public Author findOne(Long id) {
         Optional<Author> optionalAuthor = authorRepository.findById(id);
         return optionalAuthor.orElse(null);

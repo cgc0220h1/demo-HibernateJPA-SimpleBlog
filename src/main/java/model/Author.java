@@ -30,9 +30,9 @@ public class Author {
     @Column
     private String imageLink;
 
-    @OneToMany
+    @OneToMany(mappedBy = "author")
     @Access(AccessType.PROPERTY)
-    private Collection<Post> post;
+    private Collection<Post> posts;
 
     public Author() {
     }
@@ -93,12 +93,12 @@ public class Author {
         this.imageLink = imageLink;
     }
 
-    public Collection<Post> getPost() {
-        return post;
+    public Collection<Post> getPosts() {
+        return posts;
     }
 
-    public void setPost(Collection<Post> posts) {
-        this.post = posts;
+    public void setPosts(Collection<Post> posts) {
+        this.posts = posts;
     }
 
     @Override
@@ -111,7 +111,7 @@ public class Author {
                 ", email='" + email + '\'' +
                 ", bio='" + bio + '\'' +
                 ", imageLink='" + imageLink + '\'' +
-                ", posts=" + post +
+                ", posts=" + posts +
                 '}';
     }
 
@@ -127,11 +127,11 @@ public class Author {
                 Objects.equals(getEmail(), author.getEmail()) &&
                 Objects.equals(getBio(), author.getBio()) &&
                 Objects.equals(getImageLink(), author.getImageLink()) &&
-                Objects.equals(getPost(), author.getPost());
+                Objects.equals(getPosts(), author.getPosts());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDateOfBirth(), getPhoneNumber(), getEmail(), getBio(), getImageLink(), getPost());
+        return Objects.hash(getId(), getName(), getDateOfBirth(), getPhoneNumber(), getEmail(), getBio(), getImageLink(), getPosts());
     }
 }

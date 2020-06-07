@@ -34,9 +34,9 @@ public class Post {
     @Access(AccessType.PROPERTY)
     private Author author;
 
-    @OneToMany
+    @OneToMany(mappedBy = "post")
     @Access(AccessType.PROPERTY)
-    private Collection<Comment> comment;
+    private Collection<Comment> comments;
 
     public Post() {
     }
@@ -97,12 +97,12 @@ public class Post {
         this.author = author;
     }
 
-    public Collection<Comment> getComment() {
-        return comment;
+    public Collection<Comment> getComments() {
+        return comments;
     }
 
-    public void setComment(Collection<Comment> comment) {
-        this.comment = comment;
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class Post {
                 ", imageLink='" + imageLink + '\'' +
                 ", tag=" + category +
                 ", author=" + author +
-                ", comment=" + comment +
+                ", comment=" + comments +
                 '}';
     }
 
@@ -131,11 +131,11 @@ public class Post {
                 Objects.equals(getImageLink(), post.getImageLink()) &&
                 Objects.equals(getCategory(), post.getCategory()) &&
                 Objects.equals(getAuthor(), post.getAuthor()) &&
-                Objects.equals(getComment(), post.getComment());
+                Objects.equals(getComments(), post.getComments());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getContent(), getCreateTime(), getImageLink(), getCategory(), getAuthor(), getComment());
+        return Objects.hash(getId(), getTitle(), getContent(), getCreateTime(), getImageLink(), getCategory(), getAuthor(), getComments());
     }
 }

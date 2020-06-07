@@ -1,5 +1,6 @@
 package config;
 
+import formatter.CategoryFormatter;
 import formatter.MonthFormatter;
 import formatter.TimeStampFormatter;
 import model.Author;
@@ -28,8 +29,10 @@ import org.thymeleaf.templatemode.TemplateMode;
 import repository.AuthorRepository;
 import repository.PostRepository;
 import repository.CategoryRepository;
-import service.GenericService;
+import service.author.AuthorService;
 import service.author.AuthorServiceImp;
+import service.category.CategoryService;
+import service.post.PostService;
 import service.post.PostServiceImp;
 import service.category.CategoryServiceImp;
 
@@ -129,20 +132,21 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new TimeStampFormatter());
         registry.addFormatter(new MonthFormatter());
+        registry.addFormatter(new CategoryFormatter(applicationContext.getBean(CategoryServiceImp.class)));
     }
 
     @Bean
-    public GenericService<Post> postService(PostRepository postRepository) {
+    public PostService postService(PostRepository postRepository) {
         return new PostServiceImp(postRepository);
     }
 
     @Bean
-    public GenericService<Author> authorService(AuthorRepository authorRepository) {
+    public AuthorService authorService(AuthorRepository authorRepository) {
         return new AuthorServiceImp(authorRepository);
     }
 
     @Bean
-    public GenericService<Category> tagService(CategoryRepository categoryRepository) {
+    public CategoryService categoryService(CategoryRepository categoryRepository) {
         return new CategoryServiceImp(categoryRepository);
     }
 }

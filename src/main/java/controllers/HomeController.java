@@ -30,7 +30,7 @@ public class HomeController {
     public ModelAndView showPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView("index");
         Page<Post> postList = postService.findAll(id - 1, 6);
-        Page<Post> filterPost = PostUtil.summaryPost(postList);
+        Page<Post> filterPost = PostUtil.summaryPost(postList,36);
         modelAndView.addObject("numberOfPage", filterPost.getTotalPages());
         modelAndView.addObject("postList", filterPost);
         modelAndView.addObject("headerTitle", "Bài viết gần đây");

@@ -25,7 +25,7 @@ public class DateController {
     public ModelAndView showPostByMonthAndYear(@RequestParam("range") Timestamp[] range) {
         ModelAndView modelAndView = new ModelAndView("index");
         Page<Post> postList = postService.findInDateRange(range[0], range[1]);
-        Page<Post> summaryPost = PostUtil.summaryPost(postList);
+        Page<Post> summaryPost = PostUtil.summaryPost(postList,36);
         modelAndView.addObject("numberOfPage", postList.getTotalPages());
         modelAndView.addObject("postList", summaryPost);
 

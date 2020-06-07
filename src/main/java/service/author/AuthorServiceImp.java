@@ -4,6 +4,7 @@ import model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import repository.AuthorRepository;
 
@@ -24,6 +25,11 @@ public class AuthorServiceImp implements AuthorService {
     @Override
     public List<Author> findAll() {
         return authorRepository.findAll();
+    }
+
+    @Override
+    public List<Author> findAll(Sort sort) {
+        return authorRepository.findAll(sort);
     }
 
     @Override

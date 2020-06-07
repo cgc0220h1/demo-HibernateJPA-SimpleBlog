@@ -3,19 +3,20 @@ package controllers;
 import model.Author;
 import model.Category;
 import model.Post;
-import org.apache.commons.text.WordUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.GenericService;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Year;
 import java.time.format.TextStyle;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/blog")
@@ -40,28 +41,21 @@ public class PostController {
         return tagService.findAll();
     }
 
-    @ModelAttribute(name = "datePostList")
-    public List<String> datePostList() {
-        List<String> datePostList = new LinkedList<>();
-        List<Post> postList = postService.findAll();
-        for (Post post : postList) {
-            LocalDate datePost = post.getCreateTime().toLocalDateTime().toLocalDate();
-            Locale locale = new Locale("vi", "VN");
-            Month month = datePost.getMonth();
-            String monthDisplay = WordUtils.capitalizeFully(month.getDisplayName(TextStyle.FULL, locale));
-            datePostList.add(monthDisplay);
-        }
-        return datePostList;
-    }
+    @ModelAttribute(name = "datePostMap")
+    public Map<Year, Set<Month>> datePostMap() {
+        Map<Year, Set<Month>> dateMap = new HashMap<>();
+        List<Post> postList = postService.findAll(Sort.by(Sort.Direction.ASC, "createTime"));
 
-    @ModelAttribute(name = "newDatePostList")
-    public List<LocalDate> newDatePostList() {
-        List<LocalDate> datePostList = new LinkedList<>();
-        List<Post> postList = postService.findAll();
         for (Post post : postList) {
-            datePostList.add(post.getCreateTime().toLocalDateTime().toLocalDate());
+            LocalDate postDate = post.getCreateTime().toLocalDateTime().toLocalDate();
+            Year postYear = Year.of(postDate.getYear());
+            Month postMonth = postDate.getMonth();
+            if (dateMap.get(postYear) == null) {
+                dateMap.put(postYear, new LinkedHashSet<>());
+            }
+            dateMap.get(postYear).add(postMonth);
         }
-        return datePostList;
+        return dateMap;
     }
 
     @GetMapping("/{id}")

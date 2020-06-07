@@ -88,11 +88,31 @@
                     <!-- END sidebar-box -->
 
                     <div class="sidebar-box">
-                        <h3 class="heading">Bài viết theo tháng</h3>
-                        <ul class="categories" th:each="date : ${newDatePostList}">
-                            <li><a th:href="@{/month(range=${date.getYear()}+'-'+${date.getMonthValue()})}"
-                                   th:text="${date}">Tên tháng ở đây<span>(Số lượng bài viết ở đây)</span></a>
-                            </li>
+                        <h3 class="heading">Dòng thời gian</h3>
+                        <ul class="list-group">
+                            <th:block th:each="entry : ${datePostMap.entrySet()}">
+                                <li class="list-group-item ca">
+                                    <a class="nav-link"
+                                       th:href="@{/date(range=${entry.getKey().getValue()})}"
+                                       th:text="${entry.getKey()}">Năm ở đây</a>
+                                    <ul class="list-group">
+                                        <th:block th:each="month : ${entry.getValue()}">
+                                            <li class="list-group-item">
+                                                <a class="nav-link"
+                                                   th:href="@{/date(range=${entry.getKey()}+'-'+${month.getValue()})}"
+                                                   th:text="${{month}}">Tháng ở đây</a>
+                                            </li>
+                                        </th:block>
+                                    </ul>
+                                </li>
+                                <!--                                <th:block>-->
+                                <!--                                    <ul th:each="month : ${}"></ul>-->
+                                <!--                                </th:block>-->
+                                <!--                                <li><a th:href="@{/}" th:text="${date.getYear()}"></a>-->
+                                <!--                                    <a th:href="@{/month(range=${date.getYear()}+'-'+${date.getMonthValue()})}"-->
+                                <!--                                       th:text="${date}">Tên tháng ở đây<span>(Số lượng bài viết ở đây)</span></a>-->
+                                <!--                                </li>-->
+                            </th:block>
                         </ul>
                     </div>
                     <!-- END sidebar-box -->

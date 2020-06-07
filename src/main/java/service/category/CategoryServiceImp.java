@@ -4,6 +4,7 @@ import model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import repository.CategoryRepository;
 
@@ -23,6 +24,11 @@ public class CategoryServiceImp implements CategoryService {
     @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public List<Category> findAll(Sort sort) {
+        return categoryRepository.findAll(sort);
     }
 
     @Override

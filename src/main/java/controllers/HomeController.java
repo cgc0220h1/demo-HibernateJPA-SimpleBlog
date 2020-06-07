@@ -13,11 +13,11 @@ import util.PostUtil;
 
 @Controller
 @RequestMapping("/homepage")
-public class HomePageController {
+public class HomeController {
     private final GenericService<Post> postService;
 
     @Autowired
-    public HomePageController(GenericService<Post> postService) {
+    public HomeController(GenericService<Post> postService) {
         this.postService = postService;
     }
 

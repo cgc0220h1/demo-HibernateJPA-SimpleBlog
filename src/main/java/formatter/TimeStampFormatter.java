@@ -15,15 +15,25 @@ public class TimeStampFormatter implements Formatter<Timestamp[]> {
     @Override
     public Timestamp[] parse(String text, Locale locale) throws ParseException {
         String[] data = text.split("-");
-
-        YearMonth yearMonth = YearMonth.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
-        LocalDateTime startDate = LocalDateTime.of(
-                LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1),
-                LocalTime.MIDNIGHT);
-        LocalDateTime endDate = LocalDateTime.of(
-                LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), yearMonth.lengthOfMonth()),
-                LocalTime.MIDNIGHT);
-
+        LocalDateTime startDate;
+        LocalDateTime endDate;
+        if (data.length == 1) {
+            Year year = Year.of(Integer.parseInt(text));
+            startDate = LocalDateTime.of(
+                    LocalDate.of(year.getValue(), 1, 1),
+                    LocalTime.MIDNIGHT);
+            endDate = LocalDateTime.of(
+                    LocalDate.of(year.getValue(), 12, 31),
+                    LocalTime.MIDNIGHT);
+        } else {
+            YearMonth yearMonth = YearMonth.of(Integer.parseInt(data[0]), Integer.parseInt(data[1]));
+            startDate = LocalDateTime.of(
+                    LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), 1),
+                    LocalTime.MIDNIGHT);
+            endDate = LocalDateTime.of(
+                    LocalDate.of(yearMonth.getYear(), yearMonth.getMonthValue(), yearMonth.lengthOfMonth()),
+                    LocalTime.MIDNIGHT);
+        }
         return new Timestamp[]{Timestamp.valueOf(startDate), Timestamp.valueOf(endDate)};
     }
 

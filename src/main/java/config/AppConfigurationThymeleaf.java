@@ -1,5 +1,6 @@
 package config;
 
+import formatter.MonthFormatter;
 import formatter.TimeStampFormatter;
 import model.Author;
 import model.Category;
@@ -127,6 +128,7 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new TimeStampFormatter());
+        registry.addFormatter(new MonthFormatter());
     }
 
     @Bean

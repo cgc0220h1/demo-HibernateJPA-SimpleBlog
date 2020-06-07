@@ -6,7 +6,6 @@ import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import service.GenericService;
@@ -14,9 +13,7 @@ import service.GenericService;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
-import java.time.format.TextStyle;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/blog")

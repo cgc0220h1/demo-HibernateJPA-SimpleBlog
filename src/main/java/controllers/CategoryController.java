@@ -34,7 +34,7 @@ public class CategoryController {
         Pageable pageRequest = PageRequest.of(pageName - 1, 6, Sort.by("createTime").descending());
         Page<Post> postPage = postService.findByCategory(category, pageRequest);
         PostUtil.summaryPost(postPage, 36);
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("public/index");
         modelAndView.addObject("postList", postPage);
         modelAndView.addObject("headerTitle", "Bài viết thuộc thể loại " + category.getName());
         modelAndView.addObject("numberOfPage", postPage.getTotalPages());

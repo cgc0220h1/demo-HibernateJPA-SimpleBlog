@@ -32,7 +32,7 @@ public class HomeController {
 
     @GetMapping("/page/{pageNum}")
     public ModelAndView showPage(@PathVariable("pageNum") int pageNum) {
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("public/index");
         Pageable pageable = PageRequest.of(pageNum - 1, 6, Sort.by("createTime").descending());
         Page<Post> postList = postService.findAll(pageable);
         PostUtil.summaryPost(postList, 36);

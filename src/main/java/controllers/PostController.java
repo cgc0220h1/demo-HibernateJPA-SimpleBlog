@@ -58,7 +58,7 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ModelAndView modelAndView(@PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("detail");
+        ModelAndView modelAndView = new ModelAndView("public/detail");
         Post postSelected = postService.findOne(id);
         List<Comment> comments = commentService.findCommentsByPost(postSelected, Sort.by("createTime").descending());
         if (comments == null) {

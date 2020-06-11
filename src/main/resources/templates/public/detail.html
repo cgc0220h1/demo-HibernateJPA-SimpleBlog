@@ -46,7 +46,12 @@
                 <div class="col-md-12 col-lg-8 main-content">
 
                     <div class="post-content-body">
-                        <p th:text="${postSelected.content}"></p>
+                        <p th:text="${postSelected.content}">Nội dung bài Post</p>
+                        <label for="editor1">Chỉnh sửa thông tin ở dưới</label>
+                        <textarea name="editor" id="editor1" cols="30" rows="10" th:text="${postSelected.content}"></textarea>
+                        <script>
+                            CKEDITOR.replace('editor');
+                        </script>
                     </div>
 
                     <div class="pt-5">
@@ -168,6 +173,5 @@
 </div>
 
 <div th:replace="layout :: script"></div>
-
 </body>
 </html>

@@ -47,6 +47,15 @@
 
                     <div class="post-content-body">
                         <p th:text="${postSelected.content}">Nội dung bài Post</p>
+                        <form action="/blog/submit" method="post">
+                            <label for="editor1">Chỉnh sửa thông tin ở dưới</label>
+                            <textarea name="editor" id="editor1" cols="30" rows="10"
+                                      th:text="${postSelected.content}"></textarea>
+                            <script>
+                                CKEDITOR.replace('editor');
+                            </script>
+                            <input type="submit" value="submit">
+                        </form>
                     </div>
 
                     <div class="pt-5">

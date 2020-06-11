@@ -70,11 +70,10 @@ public class PostController {
         return modelAndView;
     }
 
-    @PostMapping("/submit/")
-    public RedirectView submitComment(@ModelAttribute("comment") Comment comment) {
-        comment.setCreateTime(new Timestamp(System.currentTimeMillis()));
-        Post post = comment.getPost();
-        commentService.save(comment);
-        return new RedirectView("/blog/" + post.getId());
+    @PostMapping("/submit")
+    public RedirectView submitComment(@RequestParam("editor") String editor) {
+        System.out.println(editor);
+        return new RedirectView("/homepage");
     }
+
 }

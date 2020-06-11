@@ -2,6 +2,7 @@ package config;
 
 import formatter.CategoryFormatter;
 import formatter.MonthFormatter;
+import formatter.PostFormatter;
 import formatter.TimeStampFormatter;
 import model.Author;
 import model.Category;
@@ -27,11 +28,14 @@ import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import repository.AuthorRepository;
+import repository.CommentRepository;
 import repository.PostRepository;
 import repository.CategoryRepository;
 import service.author.AuthorService;
 import service.author.AuthorServiceImp;
 import service.category.CategoryService;
+import service.comment.CommentService;
+import service.comment.CommentServiceImp;
 import service.post.PostService;
 import service.post.PostServiceImp;
 import service.category.CategoryServiceImp;
@@ -45,7 +49,7 @@ import java.util.Properties;
 @EnableWebMvc
 @ComponentScan("controllers")
 @EnableJpaRepositories("repository")
-public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMvcConfigurer {
+public class AppConfiguration implements ApplicationContextAware, WebMvcConfigurer {
     private ApplicationContext applicationContext;
 
     @Override
@@ -133,6 +137,7 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
         registry.addFormatter(new TimeStampFormatter());
         registry.addFormatter(new MonthFormatter());
         registry.addFormatter(new CategoryFormatter(applicationContext.getBean(CategoryServiceImp.class)));
+        registry.addFormatter(new PostFormatter(applicationContext.getBean(PostServiceImp.class)));
     }
 
     @Bean
@@ -148,5 +153,10 @@ public class AppConfigurationThymeleaf implements ApplicationContextAware, WebMv
     @Bean
     public CategoryService categoryService(CategoryRepository categoryRepository) {
         return new CategoryServiceImp(categoryRepository);
+    }
+
+    @Bean
+    public CommentService commentService(CommentRepository commentRepository) {
+        return new CommentServiceImp(commentRepository);
     }
 }

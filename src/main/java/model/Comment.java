@@ -1,17 +1,16 @@
 package model;
 
+import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
 @Table(name = "comment")
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
-    private String title;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -22,9 +21,13 @@ public class Comment {
     @Column
     private String commentAuthorEmail;
 
+    @Column
+    @CreationTimestamp
+    private Timestamp createTime;
+
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
-    @Access(AccessType.PROPERTY)
+//    @Access(AccessType.PROPERTY)
     private Post post;
 
     public Long getId() {
@@ -35,13 +38,6 @@ public class Comment {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     public String getContent() {
         return content;
@@ -67,6 +63,14 @@ public class Comment {
         this.commentAuthorEmail = commentAuthorEmail;
     }
 
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
     public Post getPost() {
         return post;
     }
@@ -76,20 +80,32 @@ public class Comment {
     }
 
     @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", commentAuthorName='" + commentAuthorName + '\'' +
+                ", commentAuthorEmail='" + commentAuthorEmail + '\'' +
+                ", createTime=" + createTime +
+                ", post=" + post +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Comment)) return false;
         Comment comment = (Comment) o;
         return Objects.equals(getId(), comment.getId()) &&
-                Objects.equals(getTitle(), comment.getTitle()) &&
                 Objects.equals(getContent(), comment.getContent()) &&
                 Objects.equals(getCommentAuthorName(), comment.getCommentAuthorName()) &&
                 Objects.equals(getCommentAuthorEmail(), comment.getCommentAuthorEmail()) &&
+                Objects.equals(getCreateTime(), comment.getCreateTime()) &&
                 Objects.equals(getPost(), comment.getPost());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getContent(), getCommentAuthorName(), getCommentAuthorEmail(), getPost());
+        return Objects.hash(getId(), getContent(), getCommentAuthorName(), getCommentAuthorEmail(), getCreateTime(), getPost());
     }
 }

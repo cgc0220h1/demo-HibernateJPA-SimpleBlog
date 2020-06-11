@@ -2,6 +2,7 @@ package repository;
 
 import model.Author;
 import model.Category;
+import model.Comment;
 import model.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

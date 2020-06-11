@@ -75,7 +75,7 @@
 
                         <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5">Để lại bình luận</h3>
-                            <form th:action="@{/blog/submit/}" method="POST"
+                            <form th:action="@{/comment/submit}" method="POST"
                                   class="p-5 bg-light" th:object="${comment}">
                                 <input hidden="hidden" type="number" th:value="${postSelected.id}" th:name="post">
                                 <div class="form-group">

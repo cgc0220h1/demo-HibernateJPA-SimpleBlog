@@ -20,7 +20,6 @@ public class PostFormatter implements Formatter<Post> {
 
     @Override
     public Post parse(String text, Locale locale) throws ParseException {
-        System.out.println("Jump to formatter " + text);
         return postService.findOne(Long.parseLong(text));
     }
 

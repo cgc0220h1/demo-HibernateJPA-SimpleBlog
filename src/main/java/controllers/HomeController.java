@@ -16,7 +16,7 @@ import service.post.PostService;
 import util.PostUtil;
 
 @Controller
-@RequestMapping("/homepage")
+@RequestMapping({"/homepage", "/"})
 public class HomeController {
     private final PostService postService;
 

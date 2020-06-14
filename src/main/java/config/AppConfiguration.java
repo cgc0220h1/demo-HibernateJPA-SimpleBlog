@@ -1,9 +1,6 @@
 package config;
 
-import formatter.CategoryFormatter;
-import formatter.MonthFormatter;
-import formatter.PostFormatter;
-import formatter.TimeStampFormatter;
+import formatter.*;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -51,7 +48,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("controllers")
+@ComponentScan({"controllers", "api"})
 @EnableJpaRepositories("repositories")
 @EnableSpringDataWebSupport
 public class AppConfiguration implements ApplicationContextAware, WebMvcConfigurer {
@@ -148,10 +145,11 @@ public class AppConfiguration implements ApplicationContextAware, WebMvcConfigur
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addFormatter(new TimeStampFormatter());
+        registry.addFormatter(new TimeStampArrayFormatter());
         registry.addFormatter(new MonthFormatter());
         registry.addFormatter(new CategoryFormatter(applicationContext.getBean(CategoryServiceImp.class)));
         registry.addFormatter(new PostFormatter(applicationContext.getBean(PostServiceImp.class)));
+        registry.addFormatter(new TimeStampFormatter());
     }
 
     @Bean

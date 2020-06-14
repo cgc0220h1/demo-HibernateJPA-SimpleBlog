@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -34,7 +36,7 @@ public class Post {
     @Access(AccessType.PROPERTY)
     private Author author;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(fetch = FetchType.EAGER)
     @Access(AccessType.PROPERTY)
     private Collection<Comment> comments;
 

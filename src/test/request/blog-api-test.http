@@ -1,0 +1,26 @@
+###Get all Posts
+GET http://localhost:80/api/posts
+
+###Get all Posts by page 2
+GET http://localhost:80/api/posts?page=2
+
+###Get all Posts by page 2 and size 3
+GET http://localhost:80/api/posts?page=2&size=3
+
+###Get Detail of one Post
+GET http://localhost:8080/api/posts/{{id}}
+
+###Get all Categories
+GET http://localhost:80/api/categories
+
+###Get all Categories by page 2
+GET http://localhost:80/api/categories?page=1
+
+###Get all Categories by page 2 and Size 3
+GET http://localhost:80/api/categories?page=2&size=3
+
+###Get all posts of single category
+GET http://localhost:80/api/categories/{{id}}/posts
+
+###Get all posts of single category with category name
+GET http://localhost:80/api/categories?name=tâm+sự

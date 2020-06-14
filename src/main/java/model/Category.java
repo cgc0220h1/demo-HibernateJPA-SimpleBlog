@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -17,6 +19,7 @@ public class Category {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "category")
     @Access(AccessType.PROPERTY)
     private Collection<Post> posts;

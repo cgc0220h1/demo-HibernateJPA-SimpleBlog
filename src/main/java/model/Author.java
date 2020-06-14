@@ -1,5 +1,7 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -30,6 +32,7 @@ public class Author {
     @Column
     private String imageLink;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "author")
     @Access(AccessType.PROPERTY)
     private Collection<Post> posts;

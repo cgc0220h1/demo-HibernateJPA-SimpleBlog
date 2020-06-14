@@ -19,11 +19,17 @@ GET http://localhost:80/api/categories?page=1
 ###Get all Categories by page 2 and Size 3
 GET http://localhost:80/api/categories?page=2&size=3
 
+###Get Category with category id
+GET http://localhost:80/api/categories/{{id}}
+
+###Get Category with category name
+GET http://localhost:80/api/categories?name=tâm+sự
+
 ###Get all posts of single category
 GET http://localhost:80/api/categories/{{id}}/posts
 
 ###Get all posts of single category by page 2
 GET http://localhost:80/api/categories/{{id}}/posts?page=2
 
-###Get all posts of single category with category name
-GET http://localhost:80/api/categories?name=tâm+sự
+###Get all posts of single category name
+GET http://localhost:80/api/posts/posts/categories?name=tâm+sự

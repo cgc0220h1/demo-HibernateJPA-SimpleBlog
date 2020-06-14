@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import service.category.CategoryService;
 import service.post.PostService;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -28,8 +29,21 @@ public class CategoriesAPI {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Category> getCategories(@PageableDefault(size = 5, sort = "name", direction = Sort.Direction.DESC) Pageable pageable) {
-        return categoryService.findAll(pageable).getContent();
+    public List<Category> getCategories(@PageableDefault(size = 5, sort = "name", direction = Sort.Direction.DESC) Pageable pageable,
+                                        @RequestParam(value = "name", defaultValue = "") String name) {
+        List<Category> categories = new LinkedList<>();
+        if (!name.equals("")) {
+            categories.add(categoryService.findByName(name));
+        } else {
+            categories = categoryService.findAll(pageable).getContent();
+        }
+        return categories;
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Category getCategoryById(@PathVariable("id") Long id) {
+        return categoryService.findOne(id);
     }
 
     @GetMapping(value = "/{id}/posts", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -38,5 +52,4 @@ public class CategoriesAPI {
         Category category = categoryService.findOne(id);
         return postService.findByCategory(category, pageable).getContent();
     }
-
 }

@@ -1,10 +1,12 @@
 package api;
 
+import model.Category;
 import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import service.category.CategoryService;
 import service.post.PostService;
 
 import java.util.List;
@@ -14,9 +16,12 @@ import java.util.List;
 public class PostsAPI {
     private final PostService postService;
 
+    private final CategoryService categoryService;
+
     @Autowired
-    public PostsAPI(PostService postService) {
+    public PostsAPI(PostService postService, CategoryService categoryService) {
         this.postService = postService;
+        this.categoryService = categoryService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,5 +34,13 @@ public class PostsAPI {
     @ResponseBody
     public Post getPostDetailById(@PathVariable("id") Long id) {
         return postService.findOne(id);
+    }
+
+    @GetMapping(value = "/posts/categories", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Post> getPostByCategoryName(@RequestParam(value = "name", defaultValue = "") String name,
+                                            Pageable pageable) {
+        Category category = categoryService.findByName(name);
+        return postService.findByCategory(category, pageable).getContent();
     }
 }

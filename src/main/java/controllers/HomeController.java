@@ -15,12 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import service.author.AuthorService;
-import service.category.CategoryService;
 import service.post.PostService;
 import util.PostUtil;
 
 @Controller
-@RequestMapping({"/homepage", "/"})
+@RequestMapping({"/homepage", "/", "/admin"})
 public class HomeController {
     private final PostService postService;
 
@@ -51,7 +50,7 @@ public class HomeController {
 
     @GetMapping("/about")
     public ModelAndView showAboutPage(@PageableDefault(size = 6, sort = "name", direction = Sort.Direction.ASC)
-                                                  Pageable pageable) {
+                                              Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("about");
         Page<Author> authorPage = authorService.findAll(pageable);
         modelAndView.addObject("authorPage", authorPage);

@@ -7,6 +7,9 @@ GET http://localhost:80/api/posts?page=2
 ###Get all Posts by page 2 and size 3
 GET http://localhost:80/api/posts?page=2&size=3
 
+###Get Posts by content
+GET http://localhost:80/api/posts?content=của mình
+
 ###Get Detail of one Post
 GET http://localhost:80/api/posts/{{id}}
 

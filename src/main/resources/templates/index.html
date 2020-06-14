@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 th:text="${headerTitle}">Bài viết gần đây</h2>
+                    <h2 th:text="${headerTitle}" id="page-title">Bài viết gần đây</h2>
                 </div>
             </div>
 
@@ -51,7 +51,12 @@
                                     <span th:text="'  ' + ${#dates.format(post.createTime,'dd-MM-yyyy')}">Chỗ này là ngày tháng</span>
                                 </div>
                                 <p th:text="${post.content}">Chỗ này viết tóm tắt</p>
-                                <p><a th:href="@{/post/__${post.id}__}">Đọc thêm</a></p>
+                                <div th:if="!${#request.userPrincipal}">
+                                    <p><a th:href="@{/post/__${post.id}__}">Đọc thêm</a></p>
+                                </div>
+                                <div th:if="${#request.isUserInRole('ADMIN')}">
+                                    <p><a th:href="@{/post/__${post.id}__}">Sửa bài viết</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -79,6 +84,34 @@
 </div>
 
 <div th:replace="layout :: script"></div>
-
+<script>
+    // $(document).ready(function () {
+    //     $("#search-form").submit(function (event) {
+    //         let placeHolder = "Những bài viết có chứa từ khoá: "
+    //         let content = $("#search-bar").val();
+    //         $("#page-title").html(placeHolder + content);
+    //         $.ajax({
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             type: "GET",
+    //             url: "/api/posts?content=" + content,
+    //             error : function () {
+    //                 $("#page-title").html("Có lỗi xảy ra");
+    //             },
+    //             success: function (data) {
+    //                 $(".row").remove();
+    //                 $.each(data, function (index) {
+    //                     $(".row").append("<div class=\"col-lg-4 mb-4\">").append("<div class=\"entry2\">")
+    //                     console.log(data[index]);
+    //                     index++;
+    //                 })
+    //             }
+    //         });
+    //         event.preventDefault();
+    //     })
+    // })
+</script>
 </body>
 </html>

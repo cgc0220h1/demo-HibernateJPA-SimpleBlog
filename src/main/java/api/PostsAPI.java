@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import service.category.CategoryService;
 import service.post.PostService;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -26,8 +27,15 @@ public class PostsAPI {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Post> getPosts(Pageable pageable) {
-        return postService.findAll(pageable).getContent();
+    public List<Post> getPosts(@RequestParam(value = "content", defaultValue = "") String content,
+                               Pageable pageable) {
+        List<Post> posts;
+        if (!content.equals("")) {
+            posts = postService.findByContent(content, pageable).getContent();
+        } else {
+            posts = postService.findAll(pageable).getContent();
+        }
+        return posts;
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

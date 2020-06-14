@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="../static/css/aos.css" th:href="@{/css/aos.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript"
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+            charset="utf-8"></script>
 </head>
 <body>
 <header class="site-navbar" role="banner" th:fragment="header">
@@ -26,7 +29,7 @@
         <div class="row align-items-center">
 
             <div class="col-12 search-form-wrap js-search-form">
-                <form method="get" th:action="@{/search}">
+                <form method="get" th:action="@{/search}" id="search-form">
                     <input type="text" id="search-bar" name="content" class="form-control" placeholder="Search...">
                     <button class="search-btn" type="submit"><span class="icon-search"></span></button>
                 </form>

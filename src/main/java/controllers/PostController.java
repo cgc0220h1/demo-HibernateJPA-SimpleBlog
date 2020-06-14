@@ -84,10 +84,14 @@ public class PostController {
         return modelAndView;
     }
 
-    @PostMapping("/submit")
-    public RedirectView submitComment(@RequestParam("editor") String editor) {
+    @PostMapping("/{id}/edit")
+    public RedirectView submitComment(@RequestParam("editor") String editor,
+                                      @PathVariable("id") Long id) {
         System.out.println(editor);
-        return new RedirectView("/homepage");
+        Post post = postService.findOne(id);
+        post.setContent(editor);
+        postService.save(post);
+        return new RedirectView("/post/" + id);
     }
 
 }

@@ -46,7 +46,21 @@
                 <div class="col-md-12 col-lg-8 main-content">
 
                     <div class="post-content-body">
-                        <p th:text="${postSelected.content}">Nội dung bài Post</p>
+                        <div th:if="!${#request.userPrincipal}" th:utext="${postSelected.content}">
+                        </div>
+                        <div th:if="${#request.isUserInRole('ADMIN')}">
+                            <form th:action="@{/post/__${postSelected.id}__/edit}" method="post">
+                                <label for="ck-editor">Chỉnh sửa bài viết</label>
+                                <textarea name="editor" id="ck-editor"
+                                          cols="30" rows="10"
+                                          th:text="${postSelected.content}"></textarea>
+                                <script>
+                                    CKEDITOR.replace("ck-editor");
+                                </script>
+                                <br>
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                            </form>
+                        </div>
                     </div>
 
                     <div class="pt-5">

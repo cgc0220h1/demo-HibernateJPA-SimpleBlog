@@ -27,6 +27,6 @@ public class CommentController {
         comment.setCreateTime(new Timestamp(System.currentTimeMillis()));
         Post post = comment.getPost();
         commentService.save(comment);
-        return new RedirectView("/blog/" + post.getId());
+        return new RedirectView("/post/" + post.getId());
     }
 }

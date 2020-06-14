@@ -32,7 +32,7 @@ public class CategoryServiceImp implements CategoryService {
 
     @Override
     public Page<Category> findAll(Pageable pageable) {
-        return null;
+        return categoryRepository.findAll(pageable);
     }
 
     @Override

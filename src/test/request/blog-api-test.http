@@ -22,5 +22,8 @@ GET http://localhost:80/api/categories?page=2&size=3
 ###Get all posts of single category
 GET http://localhost:80/api/categories/{{id}}/posts
 
+###Get all posts of single category by page 2
+GET http://localhost:80/api/categories/{{id}}/posts?page=2
+
 ###Get all posts of single category with category name
 GET http://localhost:80/api/categories?name=tâm+sự

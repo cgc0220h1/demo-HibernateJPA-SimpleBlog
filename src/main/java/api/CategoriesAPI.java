@@ -1,16 +1,15 @@
 package api;
 
 import model.Category;
+import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import service.category.CategoryService;
+import service.post.PostService;
 
 import java.util.List;
 
@@ -19,9 +18,12 @@ import java.util.List;
 public class CategoriesAPI {
     private final CategoryService categoryService;
 
+    private final PostService postService;
+
     @Autowired
-    public CategoriesAPI(CategoryService categoryService) {
+    public CategoriesAPI(CategoryService categoryService, PostService postService) {
         this.categoryService = categoryService;
+        this.postService = postService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,4 +31,12 @@ public class CategoriesAPI {
     public List<Category> getCategories(@PageableDefault(size = 5, sort = "name", direction = Sort.Direction.DESC) Pageable pageable) {
         return categoryService.findAll(pageable).getContent();
     }
+
+    @GetMapping(value = "/{id}/posts", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Post> getPostsByCategoryId(@PathVariable("id") Long id, Pageable pageable) {
+        Category category = categoryService.findOne(id);
+        return postService.findByCategory(category, pageable).getContent();
+    }
+
 }

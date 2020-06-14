@@ -60,8 +60,7 @@ public class PostController {
     }
 
     @GetMapping()
-    public ModelAndView showPage(@PageableDefault(size = 6, sort = "createTime", direction = Sort.Direction.DESC)
-                                         Pageable pageable) {
+    public ModelAndView showPage(Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
         Page<Post> postPage = postService.findAll(pageable);
         PostUtil.summaryPost(postPage, 36);

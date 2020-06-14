@@ -29,4 +29,10 @@ public interface PostService extends GenericService<Post> {
     List<Post> findByCategory(Category category, Sort sort);
 
     Page<Post> findByCategory(Category category, Pageable pageable);
+
+    List<Post> findByContent(String content);
+
+    List<Post> findByContent(String content, Sort sort);
+
+    Page<Post> findByContent(String content, Pageable pageable);
 }

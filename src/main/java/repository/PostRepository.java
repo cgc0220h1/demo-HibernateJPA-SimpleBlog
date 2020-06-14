@@ -34,4 +34,10 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findPostByCategory(Category category, Sort sort);
 
     Page<Post> findPostByCategory(Category category, Pageable pageable);
+
+    List<Post> findPostByContentContains(String content);
+
+    List<Post> findPostByContentContains(String content, Sort sort);
+
+    Page<Post> findPostByContentContains(String content, Pageable pageable);
 }

@@ -6,7 +6,6 @@ import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 import service.category.CategoryService;
 
-import java.text.ParseException;
 import java.util.Locale;
 
 @Component
@@ -19,7 +18,7 @@ public class CategoryFormatter implements Formatter<Category> {
     }
 
     @Override
-    public Category parse(String text, Locale locale) throws ParseException {
+    public Category parse(String text, Locale locale) {
         return categoryService.findOne(Long.parseLong(text));
     }
 

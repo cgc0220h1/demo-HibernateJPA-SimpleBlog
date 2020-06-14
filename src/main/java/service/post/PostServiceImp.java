@@ -68,6 +68,21 @@ public class PostServiceImp implements PostService {
     }
 
     @Override
+    public List<Post> findByContent(String content) {
+        return postRepository.findPostByContentContains(content);
+    }
+
+    @Override
+    public List<Post> findByContent(String content, Sort sort) {
+        return postRepository.findPostByContentContains(content, sort);
+    }
+
+    @Override
+    public Page<Post> findByContent(String content, Pageable pageable) {
+        return postRepository.findPostByContentContains(content, pageable);
+    }
+
+    @Override
     public List<Post> findByCategory(Category category) {
         return postRepository.findPostByCategory(category);
     }

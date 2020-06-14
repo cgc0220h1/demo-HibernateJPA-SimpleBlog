@@ -8,7 +8,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import repository.CategoryRepository;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +39,11 @@ public class CategoryServiceImp implements CategoryService {
     public Category findOne(Long id) {
         Optional<Category> tag = categoryRepository.findById(id);
         return tag.orElse(null);
+    }
+
+    @Override
+    public Category findByName(String name) {
+        return categoryRepository.findByNameContains(name).orElse(null);
     }
 
     @Override

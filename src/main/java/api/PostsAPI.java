@@ -24,4 +24,10 @@ public class PostsAPI {
     public List<Post> getPosts(Pageable pageable) {
         return postService.findAll(pageable).getContent();
     }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public Post getPostDetailById(@PathVariable("id") Long id) {
+        return postService.findOne(id);
+    }
 }

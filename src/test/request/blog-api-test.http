@@ -8,7 +8,7 @@ GET http://localhost:80/api/posts?page=2
 GET http://localhost:80/api/posts?page=2&size=3
 
 ###Get Detail of one Post
-GET http://localhost:8080/api/posts/{{id}}
+GET http://localhost:80/api/posts/{{id}}
 
 ###Get all Categories
 GET http://localhost:80/api/categories

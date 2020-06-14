@@ -4,7 +4,10 @@ import model.Category;
 import model.Comment;
 import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,15 +15,15 @@ import org.springframework.web.servlet.view.RedirectView;
 import service.category.CategoryService;
 import service.comment.CommentService;
 import service.post.PostService;
+import util.PostUtil;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.util.*;
 
 @Controller
-@RequestMapping("/blog")
+@RequestMapping("/post")
 public class PostController {
     private final PostService postService;
 
@@ -56,9 +59,21 @@ public class PostController {
         return dateMap;
     }
 
+    @GetMapping()
+    public ModelAndView showPage(@PageableDefault(size = 6, sort = "createTime", direction = Sort.Direction.DESC)
+                                         Pageable pageable) {
+        ModelAndView modelAndView = new ModelAndView("index");
+        Page<Post> postPage = postService.findAll(pageable);
+        PostUtil.summaryPost(postPage, 36);
+        modelAndView.addObject("headerTitle", "Bài viết gần đây");
+        modelAndView.addObject("postPage", postPage);
+        modelAndView.addObject("controller", "post");
+        return modelAndView;
+    }
+
     @GetMapping("/{id}")
     public ModelAndView modelAndView(@PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("public/detail");
+        ModelAndView modelAndView = new ModelAndView("detail");
         Post postSelected = postService.findOne(id);
         List<Comment> comments = commentService.findCommentsByPost(postSelected, Sort.by("createTime").descending());
         if (comments == null) {

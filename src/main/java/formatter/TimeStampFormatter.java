@@ -4,16 +4,14 @@ import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.time.*;
-import java.util.Arrays;
 import java.util.Locale;
 
 @Component
 public class TimeStampFormatter implements Formatter<Timestamp[]> {
 
     @Override
-    public Timestamp[] parse(String text, Locale locale) throws ParseException {
+    public Timestamp[] parse(String text, Locale locale) {
         String[] data = text.split("-");
         LocalDateTime startDate;
         LocalDateTime endDate;

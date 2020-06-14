@@ -34,7 +34,7 @@ public class AuthorServiceImp implements AuthorService {
 
     @Override
     public Page<Author> findAll(Pageable pageable) {
-        return null;
+        return authorRepository.findAll(pageable);
     }
 
     @Override

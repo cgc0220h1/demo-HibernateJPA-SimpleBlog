@@ -1,4 +1,4 @@
-package repository;
+package repositories;
 
 import model.Author;
 import org.springframework.data.jpa.repository.JpaRepository;

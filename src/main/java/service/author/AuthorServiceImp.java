@@ -6,9 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import repository.AuthorRepository;
+import repositories.AuthorRepository;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 

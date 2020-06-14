@@ -30,10 +30,10 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
-import repository.AuthorRepository;
-import repository.CommentRepository;
-import repository.PostRepository;
-import repository.CategoryRepository;
+import repositories.AuthorRepository;
+import repositories.CommentRepository;
+import repositories.PostRepository;
+import repositories.CategoryRepository;
 import service.author.AuthorService;
 import service.author.AuthorServiceImp;
 import service.category.CategoryService;
@@ -52,7 +52,7 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 @ComponentScan("controllers")
-@EnableJpaRepositories("repository")
+@EnableJpaRepositories("repositories")
 @EnableSpringDataWebSupport
 public class AppConfiguration implements ApplicationContextAware, WebMvcConfigurer {
     private ApplicationContext applicationContext;

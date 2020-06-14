@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head">
+    <title>Nam's blog</title>
+</head>
+<body>
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <header class="site-navbar" role="banner" th:replace="layout :: header">
+    </header>
+
+
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+         style="background-image: url('images/img_4.jpg');">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
+                        <h1 class="">Chúng mình là ai?</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-5 text-center">
+                    <h2>Những tác giả đóng góp</h2>
+                    <p>Chúng mình là những người nice nhất quả đất</p>
+                </div>
+            </div>
+            <div class="row">
+                <th:block th:each="author : ${authorPage.getContent()}">
+                    <div class="col-md-6 col-lg-4 mb-5 text-center">
+                        <img th:src="${author.imageLink}" alt="athor-image" class="img-fluid w-50 rounded-circle mb-4">
+                        <h2 class="mb-3 h5" th:text="${author.name}">Tên tác giả</h2>
+                        <p th:text="${author.bio}">Bio tác giả</p>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section bg-white">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-md-5">
+                    <div class="subscribe-1 ">
+                        <h2>Để lại Email nhé. Chúng Mình sẽ liên lạc với bạn 😁</h2>
+                        <p class="mb-5">Hiện tại chúng mình đang đi làm nên để cuối tuần chúng mình liên lạc với bạn nhé!</p>
+                        <form action="#" class="d-flex">
+                            <input type="text" class="form-control" placeholder="Nhập Email của bạn ở đây">
+                            <input type="submit" class="btn btn-primary" value="Gửi Email">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-footer" th:replace="layout :: footer">
+    </div>
+
+</div>
+<div th:replace="layout :: script"></div>
+</body>
+</html>

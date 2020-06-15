@@ -10,7 +10,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PostUtil {
-    public static final Pageable PAGEABLE = PageRequest.of(0, 6, Sort.by("createTime").descending());
 
     public static void summaryPost(Page<Post> postList, int numberOfWords) {
         for (Post post : postList) {
@@ -18,20 +17,30 @@ public class PostUtil {
         }
     }
 
-    private static String truncateAfterWords(int numberOfWords, String string) {
-        final Pattern WB_PATTERN = Pattern.compile("(?<=\\w)\\b");
-        final String END_STRING = " ... ";
+    public static String truncateAfterWords(int size, String input) {
+        if (input.length() < size) return input;
 
-        if (numberOfWords <= 0 || string == null) {
-            return "";
-        }
+        int lastTagStart = 0;
+        boolean inString = false;
+        boolean inTag = false;
 
-        Matcher m = WB_PATTERN.matcher(string);
-        for (int i = 0; i < numberOfWords && m.find(); i++) {
-            if (m.hitEnd()) {
-                return string + END_STRING;
+        for (int pos = 0; pos < size; pos++) {
+            switch (input.charAt(pos)) {
+                case '<':
+                    if (!inString && !inTag) {
+                        lastTagStart = pos;
+                        inTag = true;
+                    }
+                    break;
+                case '>':
+                    if (!inString) inTag = false;
+                    break;
+                case '\"':
+                    if (inTag) inString = !inString;
+                    break;
             }
         }
-        return string.substring(0, m.end()) + END_STRING;
+        if (!inTag) lastTagStart = size;
+        return input.substring(0, lastTagStart);
     }
 }

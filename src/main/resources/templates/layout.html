@@ -45,6 +45,8 @@
                     <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
                         <li><a th:href="@{/homepage}" th:text="#{header.homepage}">Trang chủ</a></li>
                         <li><a th:href="@{/about}" th:text="#{header.about}">Liên hệ</a></li>
+                        <li><a th:href="@{/homepage(lang=vi)}" th:text="#{language.vi}">Tiếng Việt</a></li>
+                        <li><a th:href="@{/homepage(lang=en)}" th:text="#{language.eng}">Tiếng Anh</a></li>
                         <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span
                                 class="icon-search"></span></a></li>
                     </ul>

@@ -44,7 +44,7 @@
                                     </a>
                                 </h2>
                                 <div class="post-meta align-items-center text-left clearfix">
-                                    <span class="d-inline-block mt-1">Viết bởi
+                                    <span class="d-inline-block mt-1" th:text="#{post.writeBy}">Viết bởi
                                         <a href="#" th:text="${post.author.name}">Chỗ này là tác giả
                                         </a>
                                     </span>
@@ -52,10 +52,10 @@
                                 </div>
                                 <p th:text="${post.content}">Chỗ này viết tóm tắt</p>
                                 <div th:if="!${#request.userPrincipal}">
-                                    <p><a th:href="@{/post/__${post.id}__}">Đọc thêm</a></p>
+                                    <p><a th:href="@{/post/__${post.id}__}" th:text="#{post.readMore}">Đọc thêm</a></p>
                                 </div>
                                 <div th:if="${#request.isUserInRole('ADMIN')}">
-                                    <p><a th:href="@{/post/__${post.id}__}">Sửa bài viết</a></p>
+                                    <p><a th:href="@{/post/__${post.id}__}" th:text="#{post.edit}">Sửa bài viết</a></p>
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,8 @@ package controllers;
 
 import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,14 @@ import java.sql.Timestamp;
 @Controller
 @RequestMapping("/date")
 public class DateController {
+
+    private final MessageSource messageSource;
+
     private final PostService postService;
 
     @Autowired
-    public DateController(PostService postService) {
+    public DateController(MessageSource messageSource, PostService postService) {
+        this.messageSource = messageSource;
         this.postService = postService;
     }
 
@@ -32,12 +38,12 @@ public class DateController {
 
         String headerTitle;
         if (range[0].toLocalDateTime().getMonth() == range[1].toLocalDateTime().getMonth()) {
-            headerTitle = "Bài viết trong tháng "
+            headerTitle = messageSource.getMessage("wall.title.date.month", null, LocaleContextHolder.getLocale())
                     + range[0].toLocalDateTime().getMonthValue()
-                    + " năm "
+                    + messageSource.getMessage("wall.title.date.year", null, LocaleContextHolder.getLocale())
                     + range[0].toLocalDateTime().getYear();
         } else {
-            headerTitle = "Bài viết trong năm "
+            headerTitle = messageSource.getMessage("wall.title.year", null, LocaleContextHolder.getLocale())
                     + range[0].toLocalDateTime().getYear();
         }
 

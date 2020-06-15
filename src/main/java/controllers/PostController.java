@@ -4,10 +4,11 @@ import model.Category;
 import model.Comment;
 import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +26,9 @@ import java.util.*;
 @Controller
 @RequestMapping("/post")
 public class PostController {
+
+    private final MessageSource messageSource;
+
     private final PostService postService;
 
     private final CategoryService categoryService;
@@ -32,7 +36,8 @@ public class PostController {
     private final CommentService commentService;
 
     @Autowired
-    public PostController(PostService postService, CategoryService categoryService, CommentService commentService) {
+    public PostController(MessageSource messageSource, PostService postService, CategoryService categoryService, CommentService commentService) {
+        this.messageSource = messageSource;
         this.postService = postService;
         this.categoryService = categoryService;
         this.commentService = commentService;
@@ -64,7 +69,7 @@ public class PostController {
         ModelAndView modelAndView = new ModelAndView("index");
         Page<Post> postPage = postService.findAll(pageable);
         PostUtil.summaryPost(postPage, 36);
-        modelAndView.addObject("headerTitle", "Bài viết gần đây");
+        modelAndView.addObject("headerTitle", messageSource.getMessage("wall.title.recent", null, LocaleContextHolder.getLocale()));
         modelAndView.addObject("postPage", postPage);
         modelAndView.addObject("controller", "post");
         return modelAndView;

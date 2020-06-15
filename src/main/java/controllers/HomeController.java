@@ -1,9 +1,10 @@
 package controllers;
 
 import model.Author;
-import model.Category;
 import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,12 +22,16 @@ import util.PostUtil;
 @Controller
 @RequestMapping({"/homepage", "/", "/admin"})
 public class HomeController {
+
+    private final MessageSource messageSource;
+
     private final PostService postService;
 
     private final AuthorService authorService;
 
     @Autowired
-    public HomeController(PostService postService, AuthorService authorService) {
+    public HomeController(MessageSource messageSource, PostService postService, AuthorService authorService) {
+        this.messageSource = messageSource;
         this.postService = postService;
         this.authorService = authorService;
     }
@@ -41,7 +46,12 @@ public class HomeController {
         ModelAndView modelAndView = new ModelAndView("index");
         Page<Post> postPage = postService.findByContent(content, pageable);
         PostUtil.summaryPost(postPage, 36);
-        String headerTitle = "Những bài viết có chứa từ khoá: " + content + " (" + postPage.getTotalElements() + " kết quả tìm thấy)";
+        String headerTitle = messageSource.getMessage("wall.title.search.name", null, LocaleContextHolder.getLocale())
+                + content
+                + " ("
+                + postPage.getTotalElements()
+                + messageSource.getMessage("wall.title.search.result", null, LocaleContextHolder.getLocale())
+                + ")";
         modelAndView.addObject("headerTitle", headerTitle);
         modelAndView.addObject("postPage", postPage);
         modelAndView.addObject("controller", "post");

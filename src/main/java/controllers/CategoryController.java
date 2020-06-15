@@ -3,6 +3,8 @@ package controllers;
 import model.Category;
 import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,13 @@ import util.PostUtil;
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
+    private final MessageSource messageSource;
+
     private final PostService postService;
 
     @Autowired
-    public CategoryController(PostService postService) {
+    public CategoryController(MessageSource messageSource, PostService postService) {
+        this.messageSource = messageSource;
         this.postService = postService;
     }
 
@@ -30,7 +35,11 @@ public class CategoryController {
         PostUtil.summaryPost(postPage, 36);
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("postPage", postPage);
-        modelAndView.addObject("headerTitle", "Bài viết thuộc thể loại " + category.getName());
+        modelAndView.addObject("headerTitle",
+                messageSource.getMessage(
+                        "wall.title.category",
+                        null,
+                        LocaleContextHolder.getLocale()) + category.getName());
         modelAndView.addObject("controller", "category" + "/" + category.getId());
         return modelAndView;
     }

@@ -35,4 +35,4 @@ GET http://localhost:80/api/categories/{{id}}/posts
 GET http://localhost:80/api/categories/{{id}}/posts?page=2
 
 ###Get all posts of single category name
-GET http://localhost:80/api/posts/posts/categories?name=tâm+sự
+GET http://localhost:80/api/posts/categories?name=tâm+sự

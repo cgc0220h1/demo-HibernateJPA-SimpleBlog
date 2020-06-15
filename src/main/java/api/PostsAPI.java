@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import service.category.CategoryService;
 import service.post.PostService;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @RestController
@@ -44,7 +43,7 @@ public class PostsAPI {
         return postService.findOne(id);
     }
 
-    @GetMapping(value = "/posts/categories", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/categories", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Post> getPostByCategoryName(@RequestParam(value = "name", defaultValue = "") String name,
                                             Pageable pageable) {

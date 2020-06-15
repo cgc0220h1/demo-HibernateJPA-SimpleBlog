@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
     <title>Nam's Blog</title>
-    <meta charset="utf-8">
+<!--    <meta charset="utf-8">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700|Playfair+Display:400,700,900" rel="stylesheet">
@@ -18,7 +19,7 @@
           th:href="@{/fonts/flaticon/font/flaticon.css}">
     <link rel="stylesheet" href="../static/css/aos.css" th:href="@{/css/aos.css}">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script  src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js" charset="UTF-8"></script>
     <script type="text/javascript"
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
             charset="utf-8"></script>
@@ -36,14 +37,14 @@
             </div>
 
             <div class="col-4 site-logo">
-                <a href="/homepage" class="text-black h2 mb-0">Tâm sự của Nam</a>
+                <a href="/homepage" class="text-black h2 mb-0" th:text="#{header.title}">Tâm sự của Nam</a>
             </div>
 
             <div class="col-8 text-right">
                 <nav class="site-navigation" role="navigation">
                     <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
-                        <li><a th:href="@{/homepage}">Trang chủ</a></li>
-                        <li><a th:href="@{/about}">Liên hệ</a></li>
+                        <li><a th:href="@{/homepage}" th:text="#{header.homepage}">Trang chủ</a></li>
+                        <li><a th:href="@{/about}" th:text="#{header.about}">Liên hệ</a></li>
                         <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span
                                 class="icon-search"></span></a></li>
                     </ul>
@@ -58,18 +59,12 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-md-8">
-                <h3 class="footer-heading mb-4">Thông tin thêm</h3>
-                <p>Mình là một lập trình viên (người lập trình hay thảo chương viên điện toán) là người viết ra các
-                    chương
-                    trình máy tính. "Thảo chương viên điện toán" là một từ cũ, được dùng trước năm 1975, và đang trở nên
-                    ít phổ thông hơn. Theo thuật ngữ máy tính, lập trình viên có thể là một chuyên gia trong một lĩnh
-                    vực của chương trình máy tính hoặc là một người không chuyên, viết mã cho các loại phần mềm. Người
-                    đã thực hiện và đưa ra cách tiếp cận chính thức để lập trình được gọi là người phân tích phần
-                    mềm.</p>
+                <h3 class="footer-heading mb-4" th:text="#{footer.heading}">Thông tin thêm</h3>
+                <p th:text="#{footer.content}"></p>
             </div>
             <div class="col-md-4" style="float: right">
                 <div>
-                    <h3 class="footer-heading mb-4">Mình dùng mạng xã hội này</h3>
+                    <h3 class="footer-heading mb-4" th:text="#{footer.social}">Mình dùng mạng xã hội này</h3>
                     <p>
                         <a href="https://github.com/vanduc2514"><span class="icon-github p-2"></span></a>
                         <a href="https://www.facebook.com/vanduc2514"><span

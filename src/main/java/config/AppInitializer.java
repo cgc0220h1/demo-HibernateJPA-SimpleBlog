@@ -23,13 +23,13 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         return new String[]{"/"};
     }
 
-    @Override
-    protected Filter[] getServletFilters() {
-        CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-        filter.setForceEncoding(true);
-        return new Filter[]{filter};
-    }
+//    @Override
+//    protected Filter[] getServletFilters() {
+//        CharacterEncodingFilter filter = new CharacterEncodingFilter();
+//        filter.setEncoding("UTF-8");
+//        filter.setForceEncoding(true);
+//        return new Filter[]{filter};
+//    }
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {

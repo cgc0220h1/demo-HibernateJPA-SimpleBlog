@@ -1,14 +1,16 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table(name = "post")
+@Data
+@NoArgsConstructor
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,105 +41,4 @@ public class Post {
     @OneToMany(fetch = FetchType.EAGER)
     @Access(AccessType.PROPERTY)
     private Collection<Comment> comments;
-
-    public Post() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Timestamp getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Timestamp createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getImageLink() {
-        return imageLink;
-    }
-
-    public void setImageLink(String imageLink) {
-        this.imageLink = imageLink;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Author getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
-
-    public Collection<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Collection<Comment> comments) {
-        this.comments = comments;
-    }
-
-    @Override
-    public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", headerTitle='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", createTime=" + createTime +
-                ", imageLink='" + imageLink + '\'' +
-                ", tag=" + category +
-                ", author=" + author +
-                ", comment=" + comments +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Post)) return false;
-        Post post = (Post) o;
-        return Objects.equals(getId(), post.getId()) &&
-                Objects.equals(getTitle(), post.getTitle()) &&
-                Objects.equals(getContent(), post.getContent()) &&
-                Objects.equals(getCreateTime(), post.getCreateTime()) &&
-                Objects.equals(getImageLink(), post.getImageLink()) &&
-                Objects.equals(getCategory(), post.getCategory()) &&
-                Objects.equals(getAuthor(), post.getAuthor()) &&
-                Objects.equals(getComments(), post.getComments());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getTitle(), getContent(), getCreateTime(), getImageLink(), getCategory(), getAuthor(), getComments());
-    }
 }

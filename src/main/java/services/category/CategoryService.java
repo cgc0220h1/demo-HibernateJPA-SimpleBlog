@@ -1,7 +1,7 @@
-package service.category;
+package services.category;
 
 import model.Category;
-import service.GenericService;
+import services.GenericService;
 
 public interface CategoryService extends GenericService<Category> {
     Category findByName(String name);

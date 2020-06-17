@@ -1,11 +1,11 @@
-package service.comment;
+package services.comment;
 
 import model.Comment;
 import model.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import service.GenericService;
+import services.GenericService;
 
 import java.util.List;
 

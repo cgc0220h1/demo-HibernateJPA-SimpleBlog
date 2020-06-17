@@ -4,7 +4,7 @@ import model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
-import service.post.PostService;
+import services.post.PostService;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -19,7 +19,7 @@ public class PostFormatter implements Formatter<Post> {
     }
 
     @Override
-    public Post parse(String text, Locale locale) throws ParseException {
+    public Post parse(String text, Locale locale) {
         return postService.findOne(Long.parseLong(text));
     }
 

@@ -13,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import service.category.CategoryService;
-import service.comment.CommentService;
-import service.post.PostService;
+import services.category.CategoryService;
+import services.comment.CommentService;
+import services.post.PostService;
 import util.PostUtil;
 
 import java.time.LocalDate;
@@ -56,9 +56,7 @@ public class PostController {
             LocalDate postDate = post.getCreateTime().toLocalDateTime().toLocalDate();
             Year postYear = Year.of(postDate.getYear());
             Month postMonth = postDate.getMonth();
-            if (dateMap.get(postYear) == null) {
-                dateMap.put(postYear, new LinkedHashSet<>());
-            }
+            dateMap.computeIfAbsent(postYear, k -> new LinkedHashSet<>());
             dateMap.get(postYear).add(postMonth);
         }
         return dateMap;

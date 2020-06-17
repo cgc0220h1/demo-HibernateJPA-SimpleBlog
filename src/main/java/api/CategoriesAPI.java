@@ -8,8 +8,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import service.category.CategoryService;
-import service.post.PostService;
+import services.category.CategoryService;
+import services.post.PostService;
 
 import java.util.LinkedList;
 import java.util.List;

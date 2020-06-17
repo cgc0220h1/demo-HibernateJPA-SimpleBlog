@@ -1,4 +1,4 @@
-package service.category;
+package services.category;
 
 import model.Category;
 import org.springframework.beans.factory.annotation.Autowired;

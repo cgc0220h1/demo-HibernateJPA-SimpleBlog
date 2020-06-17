@@ -4,7 +4,7 @@ import model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
-import service.category.CategoryService;
+import services.category.CategoryService;
 
 import java.util.Locale;
 

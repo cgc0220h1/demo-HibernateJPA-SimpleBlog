@@ -1,4 +1,4 @@
-package service.comment;
+package services.comment;
 
 import model.Comment;
 import model.Post;

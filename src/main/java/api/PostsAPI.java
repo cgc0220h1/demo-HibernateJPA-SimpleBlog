@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import service.category.CategoryService;
-import service.post.PostService;
+import services.category.CategoryService;
+import services.post.PostService;
 
 import java.util.List;
 

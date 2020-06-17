@@ -1,4 +1,4 @@
-package service.post;
+package services.post;
 
 import model.Author;
 import model.Category;

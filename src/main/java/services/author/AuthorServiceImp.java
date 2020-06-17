@@ -1,4 +1,4 @@
-package service.author;
+package services.author;
 
 import model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +40,11 @@ public class AuthorServiceImp implements AuthorService {
     public Author findOne(Long id) {
         Optional<Author> optionalAuthor = authorRepository.findById(id);
         return optionalAuthor.orElse(null);
+    }
+
+    @Override
+    public Author findByUserName(String username) {
+        return authorRepository.findByUsername(username).orElse(null);
     }
 
     @Override

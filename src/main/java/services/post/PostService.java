@@ -1,4 +1,4 @@
-package service.post;
+package services.post;
 
 import model.Author;
 import model.Category;
@@ -6,7 +6,7 @@ import model.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import service.GenericService;
+import services.GenericService;
 
 import java.sql.Timestamp;
 import java.util.List;

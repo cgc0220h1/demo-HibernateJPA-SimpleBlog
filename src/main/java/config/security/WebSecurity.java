@@ -15,7 +15,7 @@ public class WebSecurity {
         this.authorService = authorService;
     }
 
-    public boolean checkAuthorId(Authentication authentication, String username) {
+    public boolean checkUsername(Authentication authentication, String username) {
         Author authorLogin = authorService.findByUserName(authentication.getName());
         return authorLogin != null && authorLogin.getUsername().equals(username);
     }

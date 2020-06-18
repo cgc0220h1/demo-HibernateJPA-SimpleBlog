@@ -16,7 +16,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 @Configuration
 @ComponentScan("config")
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
-    public static final String CHECKED_USER_NAME = "@webSecurity.checkAuthorId(authentication,#userName)";
+    public static final String CHECKED_USER_NAME = "@webSecurity.checkUsername(authentication,#username)";
     private UserDetailsService userDetailsService;
 
     @Autowired
@@ -26,11 +26,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/homepage").permitAll()
+        http.authorizeRequests().antMatchers("/", "/homepage", "/{username}").permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/{userName}/profile").access(CHECKED_USER_NAME)
-                .and()
-                .formLogin().permitAll()
+                .authorizeRequests().antMatchers("/{username}/profile").access(CHECKED_USER_NAME);
+
+        http.formLogin().permitAll()
                 .and()
                 .logout().permitAll();
         CharacterEncodingFilter filter = new CharacterEncodingFilter();

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="layout :: head">
     <title>Title</title>
 </head>
@@ -51,12 +51,14 @@
                                     <span th:text="'  ' + ${#dates.format(post.createTime,'dd-MM-yyyy')}">Chỗ này là ngày tháng</span>
                                 </div>
                                 <p th:text="${post.content}">Chỗ này viết tóm tắt</p>
-                                <div th:if="!${#request.userPrincipal}">
+                                <div sec:authorize="isAnonymous() || isAuthenticated()">
                                     <p><a th:href="@{/post/__${post.id}__}" th:text="#{post.readMore}">Đọc thêm</a></p>
                                 </div>
-                                <div th:if="${#request.isUserInRole('ADMIN')}">
+                                <div sec:authorize-url="/${authorAccess.username}/profile">
                                     <p><a th:href="@{/post/__${post.id}__}" th:text="#{post.edit}">Sửa bài viết</a></p>
                                 </div>
+
+
                             </div>
                         </div>
                     </div>

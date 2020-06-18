@@ -1,6 +1,7 @@
 package config;
 
 import formatter.*;
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -29,9 +30,12 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.dialect.SpringStandardDialect;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import org.thymeleaf.standard.StandardDialect;
 import org.thymeleaf.templatemode.TemplateMode;
 import repositories.AuthorRepository;
 import repositories.CommentRepository;
@@ -81,6 +85,8 @@ public class AppConfiguration implements ApplicationContextAware, WebMvcConfigur
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
+        templateEngine.addDialect(new LayoutDialect());
+        templateEngine.addDialect(new SpringSecurityDialect());
         return templateEngine;
     }
 
@@ -165,6 +171,8 @@ public class AppConfiguration implements ApplicationContextAware, WebMvcConfigur
         interceptor.setParamName("lang");
         registry.addInterceptor(interceptor);
     }
+
+
 
     @Bean
     public LocaleResolver localeResolver() {

@@ -96,5 +96,4 @@ public class PostController {
         postService.save(post);
         return new RedirectView("/post/" + id);
     }
-
 }

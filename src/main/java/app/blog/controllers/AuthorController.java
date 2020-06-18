@@ -2,6 +2,7 @@ package app.blog.controllers;
 
 import app.blog.model.Author;
 import app.blog.model.Post;
+import app.blog.util.PostUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,17 +37,11 @@ public class AuthorController {
     public ModelAndView showPost(@ModelAttribute("author") Author author, Pageable pageable) {
         ModelAndView modelAndView = new ModelAndView("index");
         Page<Post> postPage = postService.findByAuthor(author, pageable);
+        PostUtil.summaryPost(postPage, 36);
         modelAndView.addObject("postPage", postPage);
         modelAndView.addObject("headerTitle", author.getName());
         modelAndView.addObject("authorAccess", author);
         System.out.println(author.getUsername());
         return modelAndView;
     }
-
-//    @GetMapping("/profile")
-//    public ModelAndView showProfile() {
-//        ModelAndView modelAndView = new ModelAndView("author");
-//        modelAndView.addObject("author");
-//        return modelAndView;
-//    }
 }

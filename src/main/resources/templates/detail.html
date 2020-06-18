@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout :: head">
     <title>Title</title>
 </head>
@@ -46,9 +46,9 @@
                 <div class="col-md-12 col-lg-8 main-content">
 
                     <div class="post-content-body">
-                        <div th:if="!${#request.userPrincipal}" th:utext="${postSelected.content}">
+                        <div sec:authorize="isAnonymous()" th:utext="${postSelected.content}">
                         </div>
-                        <div th:if="${#request.isUserInRole('ADMIN')}">
+                        <div sec:authorize="isAuthenticated()">
                             <form th:action="@{/post/__${postSelected.id}__/edit}" method="post">
                                 <label for="ck-editor" th:text="#{post.edit}">Chỉnh sửa bài viết</label>
                                 <textarea name="editor" id="ck-editor"
@@ -58,7 +58,7 @@
                                     CKEDITOR.replace("ck-editor");
                                 </script>
                                 <br>
-                                <button type="submit" class="btn btn-primary" th:value="#{post.save}"></button>
+                                <button type="submit" class="btn btn-primary" th:text="#{post.save}"></button>
                             </form>
                         </div>
                     </div>

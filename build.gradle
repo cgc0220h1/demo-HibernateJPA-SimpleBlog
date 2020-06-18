@@ -29,4 +29,6 @@ dependencies {
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-java8time', version: '3.0.4.RELEASE'
     compile group: 'org.apache.commons', name: 'commons-text', version: '1.8'
     compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+
 }
